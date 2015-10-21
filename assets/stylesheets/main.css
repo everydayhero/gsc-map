@@ -1250,6 +1250,24 @@ a.hui-Button {
 a.gsc-PopupContent__call-to-action {
   color: white; }
 
+.marker-cluster {
+  color: white; }
+
+.marker-cluster-small {
+  background-color: rgba(76, 128, 165, 0.6); }
+  .marker-cluster-small > div {
+    background-color: rgba(76, 128, 165, 0.6); }
+
+.marker-cluster-medium {
+  background-color: rgba(76, 128, 165, 0.7); }
+  .marker-cluster-medium > div {
+    background-color: rgba(76, 128, 165, 0.7); }
+
+.marker-cluster-large {
+  background-color: rgba(76, 128, 165, 0.8); }
+  .marker-cluster-large > div {
+    background-color: rgba(76, 128, 165, 0.8); }
+
 .gsc-Marker {
   background-image: url("../images/pin.png");
   background-size: contain;

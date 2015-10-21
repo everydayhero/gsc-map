@@ -34037,12 +34037,16 @@ exports['default'] = _react2['default'].createClass({
     var _this = this;
 
     var map = this.state.map;
+    var popup = marker.getPopup();
+    var px = map.project(popup._latlng);
+    px.y -= popup._container.clientHeight / 2;
     var markers = this.state.markers;
     var selectedMarker = this.state.selectedMarker;
     map.off('popupclose', this.handlePopupClose);
     map.off('popupopen', this.handlePopupOpen);
     markers.removeLayer(marker);
     selectedMarker.addLayer(marker);
+    map.panTo(map.unproject(px));
     marker.openPopup();
     map.on('popupclose', this.handlePopupClose);
     map.on('popupopen', this.handlePopupOpen);
