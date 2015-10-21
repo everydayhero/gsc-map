@@ -33057,6 +33057,8 @@ exports['default'] = _react2['default'].createClass({
   },
 
   openPopup: function openPopup(marker) {
+    var _this = this;
+
     var map = this.state.map;
     var markers = this.state.markers;
     var selectedMarker = this.state.selectedMarker;
@@ -33067,6 +33069,11 @@ exports['default'] = _react2['default'].createClass({
     marker.openPopup();
     map.on('popupclose', this.handlePopupClose);
     map.on('popupopen', this.handlePopupOpen);
+    this.setState({
+      selectedRacer: marker.racer_id
+    }, function () {
+      _this.props.onRacerSelection(marker.racer_id);
+    });
   },
 
   handlePopupOpen: function handlePopupOpen(e) {
@@ -33090,7 +33097,7 @@ exports['default'] = _react2['default'].createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    var _this = this;
+    var _this2 = this;
 
     var mapContainer = this.refs.map.getDOMNode();
     var map = _leaflet2['default'].map(mapContainer);
@@ -33102,23 +33109,18 @@ exports['default'] = _react2['default'].createClass({
     var selectedMarker = _leaflet2['default'].featureGroup();
     map.addLayer(selectedMarker);
 
-    var popupContainer = document.createElement('div');
-    popupContainer.style.display = 'none';
-    document.body.appendChild(popupContainer);
-
     this.setState({
       map: map,
       markers: markers,
-      selectedMarker: selectedMarker,
-      popupContainer: popupContainer
+      selectedMarker: selectedMarker
     }, function () {
       _leaflet2['default'].tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
       }).addTo(map);
-      map.on('popupopen', _this.handlePopupOpen);
-      map.on('popupclose', _this.handlePopupClose);
-      _this.renderRoute();
-      _this.renderRacers(_this.props.racers);
+      map.on('popupopen', _this2.handlePopupOpen);
+      map.on('popupclose', _this2.handlePopupClose);
+      _this2.renderRoute();
+      _this2.renderRacers(_this2.props.racers);
     });
   },
 
@@ -33155,15 +33157,15 @@ exports['default'] = _react2['default'].createClass({
     return [toDeg(racerLat), toDeg(racerLon)];
   },
 
-  selectRacer: function selectRacer(id, cb) {
-    var _this2 = this;
+  selectRacer: function selectRacer(id) {
+    var _this3 = this;
 
     var selectedRacer = this.state.selectedRacer;
     var previousRacer = (0, _lodashCollectionFind2['default'])(this.state.racers, function (racer) {
       return racer.id.toString() === (selectedRacer && selectedRacer.toString());
     });
     if (previousRacer) {
-      this.closePopup(previousRacer.marker);
+      previousRacer.marker.closePopup();
     }
     var racer = (0, _lodashCollectionFind2['default'])(this.state.racers, function (racer) {
       return racer.id.toString() === id.toString();
@@ -33171,21 +33173,16 @@ exports['default'] = _react2['default'].createClass({
     this.setState({
       selectedRacer: id
     }, function () {
-      _this2.state.map.setView(racer.marker.getLatLng(), 10);
-      _this2.openPopup(racer.marker);
-      cb && cb(id);
+      _this3.state.map.setView(racer.marker.getLatLng(), 10);
+      racer.marker.openPopup();
     });
   },
 
-  handleMarkerClick: function handleMarkerClick(id) {
-    this.selectRacer(id, this.props.onRacerSelection);
-  },
-
   racersUpdated: function racersUpdated() {
-    var _this3 = this;
+    var _this4 = this;
 
     var selectedRacer = (0, _lodashCollectionFind2['default'])(this.state.racers, function (racer) {
-      return racer.id.toString() === (_this3.props.selectedRacer && _this3.props.selectedRacer.toString());
+      return racer.id.toString() === (_this4.props.selectedRacer && _this4.props.selectedRacer.toString());
     });
     if (selectedRacer) {
       this.selectRacer(selectedRacer.id);
@@ -33213,24 +33210,19 @@ exports['default'] = _react2['default'].createClass({
   },
 
   clearRenderedRacers: function clearRenderedRacers() {
-    var popupContainer = this.state.popupContainer;
     this.state.markers.clearLayers();
-    while (popupContainer.firstChild) {
-      popupContainer.removeChild(popupContainer.firstChild);
-    }
   },
 
   renderRacers: function renderRacers(racers) {
-    var _this4 = this;
+    var _this5 = this;
 
     this.setState({
       racers: racers.map(function (racer) {
-        var point = _this4.calcRacerPosition(racer.distance_in_meters);
-        var popup = _this4.renderPopup(racer).getDOMNode();
-        var marker = _leaflet2['default'].marker(point, { icon: racerIcon }).bindPopup(popup, { offset: new _leaflet2['default'].Point(0, -32) }).on('click', function () {
-          _this4.handleMarkerClick(racer.id);
-        });
-        _this4.state.markers.addLayer(marker);
+        var point = _this5.calcRacerPosition(racer.distance_in_meters);
+        var popup = _this5.renderPopup(racer);
+        var marker = _leaflet2['default'].marker(point, { icon: racerIcon }).bindPopup(popup, { offset: new _leaflet2['default'].Point(0, -32) });
+        marker.racer_id = racer.id;
+        _this5.state.markers.addLayer(marker);
 
         return {
           id: racer.id,
@@ -33241,11 +33233,7 @@ exports['default'] = _react2['default'].createClass({
   },
 
   renderPopup: function renderPopup(racer) {
-    var container = document.createElement('div');
-    this.state.popupContainer.appendChild(container);
-    return _react2['default'].render(_react2['default'].createElement(_Popup2['default'], {
-      onClick: this.popupClicked,
-      racer: racer }), container);
+    return _react2['default'].renderToString(_react2['default'].createElement(_Popup2['default'], { racer: racer }));
   },
 
   render: function render() {
@@ -33282,12 +33270,12 @@ var Example = _react2['default'].createClass({
 
   handleTeamSelection: function handleTeamSelection(id) {
     this.setState({
-      selectedTeam: id
+      selectedTeam: id.toString()
     });
   },
 
   handleChange: function handleChange(e) {
-    this.handleTeamSelection(e.target.value);
+    this.handleTeamSelection(e.target.value.toString());
   },
 
   render: function render() {
@@ -33308,7 +33296,7 @@ var Example = _react2['default'].createClass({
           _dataTeamsJson2['default'].results.map(function (result) {
             return _react2['default'].createElement(
               'option',
-              { value: result.team.id },
+              { key: result.team.id, value: result.team.id },
               result.team.name
             );
           })
