@@ -11,7 +11,7 @@
     "watch-data": "nodemon -x 'npm run data' -w source/assets/data -e json",
     "scripts": "mkdir -p dist/assets/javascripts/ && browserify source/assets/javascripts/index.js -o dist/assets/javascripts/index.js && npm run uglify-scripts",
     "watch-scripts": "nodemon -x 'npm run scripts' -w source/assets/javascripts",
-    "uglify-scripts": "uglifyjs -cm -- dist/assets/javascripts/index.js > dist/assets/javascripts/index.min.js",
+    "uglify-scripts": "uglifyjs -c -- dist/assets/javascripts/index.js > dist/assets/javascripts/index.min.js",
     "sass": " rm -f dist/assets/stylesheets/main.css && node-sass --importer ./node_modules/node-sass-globbing -o dist/assets/stylesheets/ source/assets/stylesheets/main.scss",
     "postcss": "postcss -u 'autoprefixer' -u 'postcss-import' -o dist/assets/stylesheets/main.css dist/assets/stylesheets/main.css",
     "styles": "mkdir -p dist/assets/stylesheets/ && npm run sass && npm run postcss",
@@ -30,6 +30,7 @@
   "author": "Brad Parker <hi@bradparker.com>",
   "license": "ISC",
   "dependencies": {
+    "es6-promise": "^3.0.2",
     "hui": "everydayhero/hui#1097d46",
     "leaflet": "^0.7.5",
     "leaflet.markercluster": "^0.4.0",

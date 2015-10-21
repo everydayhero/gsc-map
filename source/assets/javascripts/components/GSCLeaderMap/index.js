@@ -3,6 +3,8 @@ import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
 import routeData from '../../../data/route.json'
 import 'whatwg-fetch'
+import promise from 'es6-promise'
+promise.polyfill()
 
 export default React.createClass({
   propTypes: {
