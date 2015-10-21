@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "0.12.7"
+  },
   "scripts": {
     "data": "mkdir -p dist/assets/data/ && cp -R source/assets/data dist/assets",
     "watch-data": "nodemon -x 'npm run data' -w source/assets/data -e json",
