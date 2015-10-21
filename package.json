@@ -14,7 +14,7 @@
     "sass": " rm -f dist/assets/stylesheets/main.css && node-sass --importer ./node_modules/node-sass-globbing -o dist/assets/stylesheets/ source/assets/stylesheets/main.scss",
     "postcss": "postcss -u 'autoprefixer' -u 'postcss-import' -o dist/assets/stylesheets/main.css dist/assets/stylesheets/main.css",
     "styles": "mkdir -p dist/assets/stylesheets/ && npm run sass && npm run postcss",
-    "watch-styles": "nodemon -x 'npm run styles' -w source/assets/stylesheets -e scss",
+    "watch-styles": "nodemon -x 'npm run styles' -w source/assets -e scss",
     "images": "mkdir -p dist/assets/images/ && cp -R source/assets/images dist/assets",
     "watch-images": "nodemon -x 'npm run images' -w source/assets/images -e png,svg,jpg",
     "index": "mkdir -p dist && cp source/index.html dist/index.html",
@@ -29,10 +29,11 @@
   "author": "Brad Parker <hi@bradparker.com>",
   "license": "ISC",
   "dependencies": {
+    "hui": "everydayhero/hui#1097d46",
     "leaflet": "^0.7.5",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^3.10.1",
-    "react": "^0.13.3",
+    "react": "^0.12.2",
     "whatwg-fetch": "^0.10.0"
   },
   "browserify": {

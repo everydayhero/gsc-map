@@ -228,6 +228,6 @@ export default React.createClass({
   },
 
   render () {
-    return <div className="map" ref="map" />
+    return <div className="map gsc-MapContainer" ref="map" />
   }
 })

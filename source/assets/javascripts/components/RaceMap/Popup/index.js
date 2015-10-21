@@ -1,4 +1,5 @@
 import React from 'react'
+import HuiButton from 'hui/buttons/Button'
 
 export default React.createClass({
   formatDistance (distance) {
@@ -53,9 +54,12 @@ export default React.createClass({
           </div>
         </div>
 
-        <button className="gsc-PopupContent__call-to-action">
+        <HuiButton
+          href={ team.url }
+          className="gsc-PopupContent__call-to-action"
+          kind="primary">
           Give to { team.name }
-        </button>
+        </HuiButton>
       </div>
     )
   }

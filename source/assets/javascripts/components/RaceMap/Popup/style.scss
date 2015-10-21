@@ -114,16 +114,12 @@
 }
 
 .gsc-PopupContent__call-to-action {
-  appearance: none;
-  cursor: pointer;
   background-color: #4c80a5;
-  border: none;
-  color: white;
-  padding: 12px;
-  border-radius: 2px;
-  line-height: 1em;
-  display: block;
   margin: 0;
-  font-size: inherit;
+  border: none;
   width: 100%;
+}
+
+a.gsc-PopupContent__call-to-action {
+  color: white;
 }
