@@ -23,7 +23,8 @@
     "watch": "npm run watch-data & npm run watch-scripts & npm run watch-styles & npm run watch-images & npm run watch-index",
     "serve": "static dist",
     "dev": "npm run watch & npm run serve",
-    "test": "mocha --compilers js:babel/register --recursive source/**/__tests__/**-test.js"
+    "test": "mocha --compilers js:babel/register --recursive source/**/__tests__/**-test.js",
+    "deploy": "git-directory-deploy --directory dist --branch gh-pages"
   },
   "author": "Brad Parker <hi@bradparker.com>",
   "license": "ISC",
@@ -57,6 +58,7 @@
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "chai": "^3.3.0",
+    "git-directory-deploy": "^1.3.0",
     "jsdom": "^3.1.2",
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",

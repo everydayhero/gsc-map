@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg
-  version="1.1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="512"
-  height="512"
-  viewBox="0 0 512 512">
-  <path d="M256 0c-88.366 0-160 71.634-160 160 0 160 160 352 160 352s160-192 160-352c0-88.366-71.635-160-160-160zM256 256c-53.020 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z"></path>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-255 129 512 512" style="enable-background:new -255 129 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#555555;}
+</style>
+<circle class="st0" cx="1" cy="289" r="100"/>
+<path class="st1" d="M1,129c-88.4,0-160,71.6-160,160C-159,449,1,641,1,641s160-192,160-352C161,200.6,89.4,129,1,129z M1,385
+	c-53,0-96-43-96-96s43-96,96-96s96,43,96,96S54,385,1,385z"/>
+<g>
+	<path class="st1" d="M22.7,316.2v-6c8-4.5,14.4-15.7,14.4-26.8c0-17.9,0-32.5-21.7-32.5s-21.7,14.6-21.7,32.5
+		c0,11.2,6.5,22.4,14.4,26.8v6c-24.5,2-43.3,14-43.3,28.6H66C66,330.2,47.2,318.2,22.7,316.2z"/>
+	<path class="st1" d="M-27.1,319c6.2-4.1,14-7.2,22.5-9.1c-1.7-2-3.2-4.2-4.6-6.7c-3.4-6.2-5.2-13.1-5.2-19.8c0-9.7,0-18.9,3.5-26.4
+		c3.4-7.3,9.4-11.8,18-13.5c-1.9-8.6-7-14.3-20.5-14.3c-21.7,0-21.7,14.6-21.7,32.5c0,11.2,6.5,22.4,14.4,26.8v6
+		c-24.5,2-43.3,14-43.3,28.6h31.5C-30.9,321.7-29.1,320.3-27.1,319L-27.1,319z"/>
+</g>
 </svg>

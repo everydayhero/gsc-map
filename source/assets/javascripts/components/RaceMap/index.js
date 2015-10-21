@@ -9,7 +9,7 @@ const toRad = (value) => value * Math.PI / 180
 const toDeg = (value) => value / Math.PI * 180
 
 let racerIcon = L.divIcon({
-  iconSize: new L.Point(32, 32),
+  iconSize: new L.Point(36, 36),
   html: '<div class="gsc-Marker" />'
 })
 
