@@ -34114,7 +34114,7 @@ exports['default'] = _react2['default'].createClass({
   fetchTeams: function fetchTeams() {
     var _this = this;
 
-    fetch('/assets/data/teams.json').then(function (response) {
+    fetch('assets/data/teams.json').then(function (response) {
       return response.json();
     }).then(function (response) {
       _this.setState({
