@@ -1,3 +1,31 @@
+.marker-cluster {
+  color: white;
+}
+
+.marker-cluster-small {
+  background-color: rgba(#4c80a5, 0.6);
+
+  & > div {
+    background-color: rgba(#4c80a5, 0.6);
+  }
+}
+
+.marker-cluster-medium {
+  background-color: rgba(#4c80a5, 0.7);
+
+  & > div {
+    background-color: rgba(#4c80a5, 0.7);
+  }
+}
+
+.marker-cluster-large {
+  background-color: rgba(#4c80a5, 0.8);
+
+  & > div {
+    background-color: rgba(#4c80a5, 0.8);
+  }
+}
+
 .gsc-MapContainer {
   @extend %general-reset;
 }

@@ -36,12 +36,16 @@ export default React.createClass({
 
   openPopup (marker) {
     let map = this.state.map
+    let popup = marker.getPopup()
+    let px = map.project(popup._latlng)
+    px.y -= popup._container.clientHeight / 2
     let markers = this.state.markers
     let selectedMarker = this.state.selectedMarker
     map.off('popupclose', this.handlePopupClose)
     map.off('popupopen', this.handlePopupOpen)
     markers.removeLayer(marker)
     selectedMarker.addLayer(marker)
+    map.panTo(map.unproject(px))
     marker.openPopup()
     map.on('popupclose', this.handlePopupClose)
     map.on('popupopen', this.handlePopupOpen)
