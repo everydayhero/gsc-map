@@ -13,12 +13,12 @@ let Example = React.createClass({
 
   handleTeamSelection (id) {
     this.setState({
-      selectedTeam: id
+      selectedTeam: id.toString()
     })
   },
 
   handleChange (e) {
-    this.handleTeamSelection(e.target.value)
+    this.handleTeamSelection(e.target.value.toString())
   },
 
   render () {
@@ -34,7 +34,7 @@ let Example = React.createClass({
             value={ this.state.selectedTeam }>
             { teamResults.results.map((result) => {
                 return (
-                  <option value={ result.team.id }>
+                  <option key={ result.team.id } value={ result.team.id }>
                     { result.team.name }
                   </option>
                 )
