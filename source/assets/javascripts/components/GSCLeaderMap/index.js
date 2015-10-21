@@ -28,7 +28,7 @@ export default React.createClass({
   },
 
   fetchTeams () {
-    fetch('/assets/data/teams.json')
+    fetch('assets/data/teams.json')
       .then((response) => {
         return response.json()
       })
