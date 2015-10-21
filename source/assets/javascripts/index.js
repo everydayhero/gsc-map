@@ -2,6 +2,8 @@
 
 import React from 'react'
 import GSCLeaderMap from './components/GSCLeaderMap'
+import Leaderboards from './components/Leaderboards'
+
 import teamResults from '../data/teams.json'
 
 let Example = React.createClass({
@@ -21,12 +23,25 @@ let Example = React.createClass({
     this.handleTeamSelection(e.target.value.toString())
   },
 
+  onSelect (id) {
+    console.log(id)
+    this.setState({
+      selectedTeam: id
+    })
+  },
+
   render () {
     return (
       <div>
         <GSCLeaderMap
           onTeamSelection={ this.handleTeamSelection }
           selectedTeam={ this.state.selectedTeam } />
+        <div className="PanelWrap">
+          <div className="Panel">
+            <h2 className="Panel_header">Leaderboards</h2>
+            <Leaderboards onSelect={ this.onSelect }/>
+          </div>
+        </div>
 
         <div className="leader-list-selector">
           <select

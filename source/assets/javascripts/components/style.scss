@@ -1,0 +1,85 @@
+.PanelWrap {
+  width: 40%;
+  min-width: 520px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 2;
+}
+
+.Panel {
+  background-color: #3f434a;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.Panel_header {
+  font-family: $font-copy;
+  text-align: center;
+  margin: 0px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* move to hui */
+.hui-Tabs {
+  height: 100%;
+}
+
+.hui-Tabs__tab {
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.hui-LeaderboardRow__pageName {
+  margin: 2px 0px;
+  font-size: 13px;
+}
+
+.hui-LeaderboardRow__charityName {
+  margin: 2px 0px;
+  font-size: 13px;
+}
+
+.hui-LeaderboardRow__raised {
+  font-size: 13px;
+}
+
+.hui-Leaderboard {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.hui-Tabs_content {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.hui-LeaderboardRow--narrow .hui-LeaderboardRow__value {
+  padding-top: 26px;
+}
+
+.hui-LeaderboardRow__value {
+  padding-right: 4px;
+  font-size: 16px;
+}
+
+.leader-list-selector {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  z-index: 3;
+  padding: 1em;
+  background-color: whitesmoke;
+}
