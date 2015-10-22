@@ -66,20 +66,29 @@ export default React.createClass({
       'GSCLeaderMap__overlay--closed': !!this.state.hideOverlay
     })
 
+    let buttonClasses = classnames({
+      'GSCLeaderMap__close-overlay': true,
+      'GSCLeaderMap__close-overlay--hidden': !this.state.hideOverlay
+    })
+
+    let classes = classnames({
+      'GSCLeaderMap': true,
+      'GSCLeaderMap--overlay-open': !this.state.hideOverlay
+    })
+
     return (
       !!this.state.teams.length &&
-        (<div>
+        (<div className={ classes }>
           <RaceMap
             route={ routeData }
             onRacerSelection={ this.props.onTeamSelection }
             selectedRacer={ this.props.selectedTeam }
             racers={ this.state.teams } />
-          { !!this.state.hideOverlay &&
-            <button
-              onClick={ this.handleOverlayCloseClick}
-              className="GSCLeaderMap__close-overlay">
-              <i className="fa fa-close" />
-            </button> }
+          <button
+            onClick={ this.handleOverlayCloseClick}
+            className={ buttonClasses }>
+            <i className="fa fa-close" />
+          </button>
           <div
             onClick={ this.handleOverlayClick }
             className={ overlayClasses } />
