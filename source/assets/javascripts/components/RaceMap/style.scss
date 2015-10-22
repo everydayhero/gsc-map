@@ -40,3 +40,7 @@
   height:100%;
   margin-top: -50%;
 }
+
+.gsc-MarkerContainer--selected .gsc-Marker {
+  background-image: url('../images/pin-selected.png');
+}
