@@ -48,10 +48,10 @@
   background-color: #444;
 }
 
-.gsc-PopupContent__avatar:after {
-  content: '';
+.gsc-PopupContent__avatarImage {
   display: block;
-  padding-bottom: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .gsc-PopupContent__summary {
