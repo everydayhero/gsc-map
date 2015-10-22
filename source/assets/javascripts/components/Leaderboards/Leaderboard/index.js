@@ -91,6 +91,7 @@ export default React.createClass({
         <Leaderboard
           {...state}
           onSelect={ this.onSelect }
+          onDeSelect={ this.props.onDeSelect }
           selectedIndex={ this.props.selectedIndex }
           rowData={ this.getPageData() }
           rowComponent={ LeaderboardRow } />

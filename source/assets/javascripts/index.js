@@ -24,10 +24,28 @@ let Example = React.createClass({
   },
 
   onSelect (id) {
-    console.log(id)
-    this.setState({
-      selectedTeam: id
-    })
+    let component = this
+    id = id.toString()
+
+    if(!component.state.selectedTeam) {
+      this.setState({
+        selectedTeam: id
+      })
+
+      return
+    }
+
+    // Don't change id unless user really intented to
+    clearTimeout(this.waitOut)
+    this.waitOut = setTimeout(function() {
+      component.setState({
+        selectedTeam: id
+      })
+    }, 300)
+  },
+
+  onDeSelect () {
+    clearTimeout(this.waitOut)
   },
 
   render () {
@@ -37,25 +55,11 @@ let Example = React.createClass({
           <GSCLeaderMap
             onTeamSelection={ this.handleTeamSelection }
             selectedTeam={ this.state.selectedTeam } />
-
-          <div className="leader-list-selector">
-            <select
-              onChange={ this.handleChange }
-              value={ this.state.selectedTeam }>
-              { teamResults.results.map((result) => {
-                  return (
-                    <option key={ result.team.id } value={ result.team.id }>
-                      { result.team.name }
-                    </option>
-                  )
-                }) }
-            </select>
-          </div>
         </div>
         <div className="panelWrap">
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
-            <Leaderboards onSelect={ this.onSelect }/>
+            <Leaderboards onSelect={ this.onSelect } onDeSelect={ this.onDeSelect }/>
           </div>
         </div>
       </div>
