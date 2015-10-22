@@ -3,20 +3,8 @@
 import React from 'react'
 import Tabs from 'hui/navigation/Tabs'
 import Leaderboard from './Leaderboard'
-
-let getUrl = function(url, attibutes) {
-  for(let attibuteKey in attibutes) {
-    url = url.replace('{{ ' + attibuteKey + ' }}', attibutes[attibuteKey])
-  }
-
-  return url
-}
-
-let api = {
-  raised: 'https://everydayhero.com/api/v2/campaigns/{{ campaignId }}/leaderboard.json?type=team&limit=200&include_pages=true',
-  distance: 'https://everydayhero.com/api/v2/campaigns/{{ campaignId }}/leaderboard.json?type=team&limit=200&include_pages=true',
-  elevation: 'https://everydayhero.com/api/v2/campaigns/{{ campaignId }}/leaderboard.json?type=team&limit=200&include_pages=true'
-}
+import apiRoutes from '../../lib/apiRoutes'
+import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'Leaderboards',
@@ -31,7 +19,8 @@ export default React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignId: 'au-19283'
+      campaignId: 'au-6839',
+      domain: 'everydayhero-staging.com'
     }
   },
 
@@ -47,7 +36,7 @@ export default React.createClass({
     let tabs = [
       {
         label: 'Raised',
-        content: <Leaderboard key="raised" url={ getUrl(api.raised, { campaignId: props.campaignId } ) } onSelect={ props.onSelect }/>
+        content: <Leaderboard key="raised" url={ apiRoutes.get('raised', props) } onSelect={ props.onSelect } onDeSelect={ props.onDeSelect }/>
       },
       {
         label: 'Distance',

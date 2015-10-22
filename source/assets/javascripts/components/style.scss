@@ -13,11 +13,12 @@
 
 .panelWrap {
   width: 580px;
-  box-sizing: border-box;
-  position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
+  height: 800px;
+  box-sizing: border-box;
+  position: absolute;
   background-color: #CDD2D4;
 }
 
@@ -72,13 +73,4 @@
 .hui-Tabs_content {
   height: 100%;
   box-sizing: border-box;
-}
-
-.leader-list-selector {
-  position: absolute;
-  right: 1em;
-  top: 1em;
-  z-index: 3;
-  padding: 1em;
-  background-color: whitesmoke;
 }

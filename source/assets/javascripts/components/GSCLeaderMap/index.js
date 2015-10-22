@@ -3,10 +3,9 @@ import classnames from 'classnames'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
 import routeString from '../../../data/route.js'
+import apiRoutes from '../../lib/apiRoutes'
+import getJSON from 'hui/lib/getJSON'
 import 'es6-shim'
-import 'whatwg-fetch'
-import promise from 'es6-promise'
-promise.polyfill()
 
 const routeData = JSON.parse(routeString)
 
@@ -16,10 +15,12 @@ export default React.createClass({
     onTeamSelection: React.PropTypes.func
   },
 
-  defaultProps () {
+  getDefaultProps () {
     return {
       selectedTeam: '',
-      onTeamSelection: () => {}
+      onTeamSelection: () => {},
+      campaignId: 'au-6839',
+      domain: 'everydayhero-staging.com'
     }
   },
 
@@ -35,17 +36,22 @@ export default React.createClass({
   },
 
   fetchTeams () {
-    fetch('assets/data/teams.json')
-      .then((response) => {
-        return response.json()
+    getJSON(apiRoutes.get('distance', this.props)).then(this.onSuccess, this.onFail)
+  },
+
+  onSuccess (response) {
+    this.setState({
+      teams: response.results.map((result) => {
+        let team = merge({}, result, result.team)
+        team.id = team.team_page_id
+
+        return team
       })
-      .then((response) => {
-        this.setState({
-          teams: response.results.map((result) => {
-            return merge({}, result, result.team)
-          })
-        })
-      })
+    })
+  },
+
+  onFail (response) {
+
   },
 
   handleOverlayClick () {
