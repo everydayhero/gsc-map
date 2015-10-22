@@ -159,8 +159,11 @@ export default React.createClass({
       this.setState({
         selectedRacer: id
       }, () => {
-        this.state.map.setView(racer.marker.getLatLng(), 10)
-        racer.marker.openPopup()
+        let marker = racer.marker
+
+        this.state.markers.zoomToShowLayer(marker, function () {
+          marker.openPopup()
+        })
       })
     }
   },
