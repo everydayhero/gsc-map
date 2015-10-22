@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
 import routeString from '../../../data/route.js'
@@ -24,6 +25,7 @@ export default React.createClass({
 
   getInitialState () {
     return {
+      hideOverlay: false,
       teams: []
     }
   },
@@ -46,14 +48,42 @@ export default React.createClass({
       })
   },
 
+  handleOverlayClick () {
+    this.setState({
+      hideOverlay: true
+    })
+  },
+
+  handleOverlayCloseClick () {
+    this.setState({
+      hideOverlay: false
+    })
+  },
+
   render () {
+    let overlayClasses = classnames({
+      'GSCLeaderMap__overlay': true,
+      'GSCLeaderMap__overlay--closed': !!this.state.hideOverlay
+    })
+
     return (
-        !!this.state.teams.length &&
+      !!this.state.teams.length &&
+        (<div>
           <RaceMap
             route={ routeData }
             onRacerSelection={ this.props.onTeamSelection }
             selectedRacer={ this.props.selectedTeam }
             racers={ this.state.teams } />
+          { !!this.state.hideOverlay &&
+            <button
+              onClick={ this.handleOverlayCloseClick}
+              className="GSCLeaderMap__close-overlay">
+              <i className="fa fa-close" />
+            </button> }
+          <div
+            onClick={ this.handleOverlayClick }
+            className={ overlayClasses } />
+        </div>)
     )
   }
 })

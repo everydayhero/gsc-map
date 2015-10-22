@@ -1,1 +1,25 @@
+.GSCLeaderMap__overlay {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 
+.GSCLeaderMap__overlay--closed {
+  display: none;
+}
+
+.GSCLeaderMap__close-overlay {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  z-index: 2;
+  appearance: none;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5em;
+  overflow: hidden;
+}
