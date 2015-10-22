@@ -1,5 +1,6 @@
 import React from 'react'
 import HuiButton from 'hui/buttons/Button'
+import numeric from 'hui/lib/numeric'
 
 export default React.createClass({
   formatDistance (distance) {
@@ -7,7 +8,11 @@ export default React.createClass({
   },
 
   fundraisingToGo (team) {
-    return `${ 100 - ((100 / team.fundraising_goal) * team.fundraising_current) }%`
+    if(team.amount.cents >= team.target_cents) {
+      return '0%'
+    }
+
+    return `${ 100 - ((100 / team.target_cents) * team.amount.cents) }%`
   },
 
   render () {
@@ -18,7 +23,9 @@ export default React.createClass({
         onClick={ this.props.onClick }>
 
         <header className="gsc-PopupContent__header">
-          <div className="gsc-PopupContent__avatar" />
+          <div className="gsc-PopupContent__avatar">
+            <img src={ team.image.medium_image_url } className="gsc-PopupContent__avatarImage"/>
+          </div>
           <div className="gsc-PopupContent__summary">
             <h3 className="gsc-PopupContent__title">{ team.name }</h3>
             <div className="gsc-PopupContent__attribute-list">
@@ -50,7 +57,7 @@ export default React.createClass({
             }} />
           </div>
           <div className="gsc-PopupContent__progress-summary">
-            ${ team.fundraising_current } raised of ${ team.fundraising_goal }
+            { numeric.money('$', team.amount.cents) } raised of { numeric.money('$', team.target_cents) }
           </div>
         </div>
 
