@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Tabs from 'hui/navigation/Tabs'
+import Button from 'hui/buttons/Button'
 import Leaderboard from './Leaderboard'
 import apiRoutes from '../../lib/apiRoutes'
 import _ from 'lodash'
@@ -33,6 +34,17 @@ export default React.createClass({
   render: function() {
     let state = this.state
     let props = this.props
+    let underConstruction = (
+          <div key="distance" className="Leaderboards__underConstruction">
+            <h2 className="underConstruction__header">
+              Official ride commences Nov 1st 2015
+            </h2>
+            <div className="underConstruction__cta">
+              <Button kind="cta" href="https://greatsoutherncrossing.everydayhero.com/au/get-started">Sign Up</Button>
+            </div>
+          </div>
+        )
+
     let tabs = [
       {
         label: 'Raised',
@@ -40,11 +52,11 @@ export default React.createClass({
       },
       {
         label: 'Distance',
-        content: <div key="raised">Distance</div>
+        content: underConstruction
       },
       {
         label: 'Elevation',
-        content: <div key="raised">Distance</div>
+        content: underConstruction
       }
     ]
 
