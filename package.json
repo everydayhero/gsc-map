@@ -30,6 +30,7 @@
   "author": "Brad Parker <hi@bradparker.com>",
   "license": "ISC",
   "dependencies": {
+    "classlist-polyfill": "^1.0.2",
     "es6-promise": "^3.0.2",
     "hui": "everydayhero/hui#1097d46",
     "leaflet": "^0.7.5",

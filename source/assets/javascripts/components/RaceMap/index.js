@@ -1,6 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import 'leaflet.markercluster'
+import 'classlist-polyfill'
 import find from 'lodash/collection/find'
 import Popup from './Popup'
 
@@ -45,6 +46,7 @@ export default React.createClass({
     map.off('popupopen', this.handlePopupOpen)
     markers.removeLayer(marker)
     selectedMarker.addLayer(marker)
+    marker._icon.classList.add('gsc-MarkerContainer--selected')
     map.panTo(map.unproject(px))
     marker.openPopup()
     map.on('popupclose', this.handlePopupClose)
@@ -68,6 +70,8 @@ export default React.createClass({
     map.off('popupclose', this.handlePopupClose)
     selectedMarker.clearLayers()
     markers.addLayer(marker)
+    let icon = marker._icon
+    !!icon && icon.classList.remove('gsc-MarkerContainer--selected')
     map.on('popupclose', this.handlePopupClose)
   },
 
