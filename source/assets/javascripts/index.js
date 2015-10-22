@@ -32,29 +32,31 @@ let Example = React.createClass({
 
   render () {
     return (
-      <div>
-        <GSCLeaderMap
-          onTeamSelection={ this.handleTeamSelection }
-          selectedTeam={ this.state.selectedTeam } />
-        <div className="PanelWrap">
-          <div className="Panel">
-            <h2 className="Panel_header">Leaderboards</h2>
-            <Leaderboards onSelect={ this.onSelect }/>
+      <div className="tracker">
+        <div className="mapWrap">
+          <GSCLeaderMap
+            onTeamSelection={ this.handleTeamSelection }
+            selectedTeam={ this.state.selectedTeam } />
+
+          <div className="leader-list-selector">
+            <select
+              onChange={ this.handleChange }
+              value={ this.state.selectedTeam }>
+              { teamResults.results.map((result) => {
+                  return (
+                    <option key={ result.team.id } value={ result.team.id }>
+                      { result.team.name }
+                    </option>
+                  )
+                }) }
+            </select>
           </div>
         </div>
-
-        <div className="leader-list-selector">
-          <select
-            onChange={ this.handleChange }
-            value={ this.state.selectedTeam }>
-            { teamResults.results.map((result) => {
-                return (
-                  <option key={ result.team.id } value={ result.team.id }>
-                    { result.team.name }
-                  </option>
-                )
-              }) }
-          </select>
+        <div className="panelWrap">
+          <div className="panel">
+            <h2 className="panel_header">Leaderboards</h2>
+            <Leaderboards onSelect={ this.onSelect }/>
+          </div>
         </div>
       </div>
     )

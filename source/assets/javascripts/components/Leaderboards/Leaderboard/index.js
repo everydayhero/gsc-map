@@ -40,6 +40,9 @@ export default React.createClass({
 
   onSuccess: function(response) {
     let data = _.get(response, this.state.dataPath)
+    data.forEach(function(item, index) {
+      item.rank = index + 1
+    })
 
     this.setState({
       data,

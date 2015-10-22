@@ -1,16 +1,24 @@
-.PanelWrap {
-  width: 40%;
-  min-width: 520px;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 24px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  z-index: 2;
+.tracker {
+  display: table;
 }
 
-.Panel {
+.mapWrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: table-cell;
+}
+
+.panelWrap {
+  width: 580px;
+  height: 800px;
+  box-sizing: border-box;
+  padding: 24px 24px 24px 0px;
+  position: relative;
+  background-color: #CDD2D4;
+}
+
+.panel {
   background-color: #3f434a;
   box-sizing: border-box;
   height: 100%;
@@ -18,7 +26,7 @@
   border-radius: 8px;
 }
 
-.Panel_header {
+.panel_header {
   font-family: $font-copy;
   text-align: center;
   margin: 0px;
@@ -32,29 +40,6 @@
   height: 100%;
 }
 
-.hui-Tabs__tab {
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 13px;
-  padding: 10px 12px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.hui-LeaderboardRow__pageName {
-  margin: 2px 0px;
-  font-size: 13px;
-}
-
-.hui-LeaderboardRow__charityName {
-  margin: 2px 0px;
-  font-size: 13px;
-}
-
-.hui-LeaderboardRow__raised {
-  font-size: 13px;
-}
-
 .hui-Leaderboard {
   height: 100%;
   overflow-y: scroll;
@@ -64,15 +49,6 @@
 .hui-Tabs_content {
   height: 100%;
   box-sizing: border-box;
-}
-
-.hui-LeaderboardRow--narrow .hui-LeaderboardRow__value {
-  padding-top: 26px;
-}
-
-.hui-LeaderboardRow__value {
-  padding-right: 4px;
-  font-size: 16px;
 }
 
 .leader-list-selector {

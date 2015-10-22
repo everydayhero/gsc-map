@@ -47,15 +47,15 @@ export default React.createClass({
     let tabs = [
       {
         label: 'Raised',
-        content: <Leaderboard url={ getUrl(api.raised, { campaignId: props.campaignId } ) } onSelect={ props.onSelect }/>
+        content: <Leaderboard key="raised" url={ getUrl(api.raised, { campaignId: props.campaignId } ) } onSelect={ props.onSelect }/>
       },
       {
         label: 'Distance',
-        content: <Leaderboard url={ getUrl(api.distance, { campaignId: props.campaignId } ) } onSelect={ props.onSelect }/>
+        content: <div key="raised">Distance</div>
       },
       {
         label: 'Elevation',
-        content: <Leaderboard url={ getUrl(api.distance, { campaignId: props.campaignId } ) } onSelect={ props.onSelect }/>
+        content: <div key="raised">Distance</div>
       }
     ]
 
