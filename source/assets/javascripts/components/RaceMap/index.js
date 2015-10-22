@@ -81,7 +81,7 @@ export default React.createClass({
   },
 
   componentDidMount () {
-    let mapContainer = this.refs.map.getDOMNode()
+    let mapContainer = this.getDOMNode()
     let map = L.map(mapContainer)
     let markers = new L.MarkerClusterGroup({
       showCoverageOnHover: false,
@@ -156,12 +156,14 @@ export default React.createClass({
       previousRacer.marker.closePopup()
     }
     let racer = find(this.state.racers, racer => racer.id.toString() === id.toString())
-    this.setState({
-      selectedRacer: id
-    }, () => {
-      this.state.map.setView(racer.marker.getLatLng(), 10)
-      racer.marker.openPopup()
-    })
+    if (racer) {
+      this.setState({
+        selectedRacer: id
+      }, () => {
+        this.state.map.setView(racer.marker.getLatLng(), 10)
+        racer.marker.openPopup()
+      })
+    }
   },
 
   racersUpdated () {
@@ -218,6 +220,6 @@ export default React.createClass({
   },
 
   render () {
-    return <div className="map gsc-MapContainer" ref="map" />
+    return <div className="map gsc-MapContainer" />
   }
 })
