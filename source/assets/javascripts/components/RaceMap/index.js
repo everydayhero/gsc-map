@@ -84,8 +84,7 @@ export default React.createClass({
     let mapContainer = this.getDOMNode()
     let map = L.map(mapContainer)
     let markers = new L.MarkerClusterGroup({
-      showCoverageOnHover: false,
-      disableClusteringAtZoom: 9
+      showCoverageOnHover: false
     })
     map.addLayer(markers)
     let selectedMarker = L.featureGroup()
