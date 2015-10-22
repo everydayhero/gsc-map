@@ -1,11 +1,13 @@
 import React from 'react'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
-import routeData from '../../../data/route.json'
+import routeString from '../../../data/route.js'
 import 'es6-shim'
 import 'whatwg-fetch'
 import promise from 'es6-promise'
 promise.polyfill()
+
+const routeData = JSON.parse(routeString)
 
 export default React.createClass({
   propTypes: {
