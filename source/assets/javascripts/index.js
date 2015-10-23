@@ -77,5 +77,6 @@ let Example = React.createClass({
   }
 })
 
-React.render(<Example />, document.getElementById('race-map'))
-
+window.renderTracker = function(id) {
+  React.render(<Example />, document.getElementById(id))
+}
