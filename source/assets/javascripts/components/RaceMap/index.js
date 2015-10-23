@@ -3,7 +3,8 @@ import L from 'leaflet'
 import 'leaflet.markercluster'
 import 'classlist-polyfill'
 import find from 'lodash/collection/find'
-import Popup from './Popup'
+import RacerPopup from './RacerPopup'
+import WaypointPopup from './WaypointPopup'
 
 const earthsRadiusInMeters = 6371000
 const toRad = (value) => value * Math.PI / 180
@@ -11,7 +12,12 @@ const toDeg = (value) => value / Math.PI * 180
 
 let racerIcon = L.divIcon({
   iconSize: new L.Point(36, 36),
-  html: '<div class="gsc-Marker" />'
+  html: '<div class="gsc-Marker gsc-Marker--racer" />'
+})
+
+let waypointIcon = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--waypoint" />'
 })
 
 const NullRouteDatum = {
@@ -24,6 +30,7 @@ export default React.createClass({
   propTypes: {
     racers: React.PropTypes.array,
     route: React.PropTypes.array.isRequired,
+    waypoints: React.PropTypes.array,
     onRacerSelection: React.PropTypes.func
   },
 
@@ -31,11 +38,12 @@ export default React.createClass({
     return {
       racers: [],
       route: [],
+      waypoints: [],
       onRacerSelection: () => {}
     }
   },
 
-  openPopup (marker) {
+  openRacerPopup (marker) {
     let map = this.state.map
     let popup = marker.getPopup()
     let px = map.project(popup._latlng)
@@ -60,10 +68,13 @@ export default React.createClass({
 
   handlePopupOpen (e) {
     let marker = e.popup._source
-    this.openPopup(marker)
+
+    if (marker.racer_id) {
+      this.openRacerPopup(marker)
+    }
   },
 
-  closePopup (marker) {
+  closeRacerPopup (marker) {
     let map = this.state.map
     let markers = this.state.markers
     let selectedMarker = this.state.selectedMarker
@@ -77,12 +88,17 @@ export default React.createClass({
 
   handlePopupClose (e) {
     let marker = e.popup._source
-    this.closePopup(marker)
+
+    if (marker.racer_id) {
+      this.closeRacerPopup(marker)
+    }
   },
 
   componentDidMount () {
     let mapContainer = this.getDOMNode()
     let map = L.map(mapContainer)
+    let waypoints = new L.FeatureGroup()
+    map.addLayer(waypoints)
     let markers = new L.MarkerClusterGroup({
       showCoverageOnHover: false
     })
@@ -92,6 +108,7 @@ export default React.createClass({
 
     this.setState({
       map,
+      waypoints,
       markers,
       selectedMarker
     }, () => {
@@ -101,6 +118,7 @@ export default React.createClass({
       map.on('popupopen', this.handlePopupOpen)
       map.on('popupclose', this.handlePopupClose)
       this.renderRoute()
+      this.renderWaypoints()
       if (this.props.racers.length) {
         this.renderRacers(this.props.racers)
       } else {
@@ -210,7 +228,7 @@ export default React.createClass({
     this.setState({
       racers: racers.map((racer) => {
         let point = this.calcRacerPosition(racer.distance_in_meters)
-        let popup = this.renderPopup(racer)
+        let popup = this.renderRacerPopup(racer)
         let marker = L.marker(point, { icon: racerIcon })
           .bindPopup(popup, {offset: new L.Point(0, -32)})
         marker.racer_id = racer.id
@@ -224,8 +242,25 @@ export default React.createClass({
     }, this.racersUpdated)
   },
 
-  renderPopup (racer) {
-    return React.renderToString(<Popup racer={ racer } />)
+  renderWaypoints () {
+    this.props.waypoints
+      .filter((waypoint) => {
+        return !(waypoint.name === 'Brisbane' || waypoint.name === "Perth")
+      })
+      .map((waypoint) => {
+        let popup = this.renderWaypointPopup(waypoint)
+        let marker = L.marker(waypoint.point, { icon: waypointIcon })
+          .bindPopup(popup, {offset: new L.Point(0, -32)})
+        this.state.waypoints.addLayer(marker)
+      })
+  },
+
+  renderRacerPopup (racer) {
+    return React.renderToString(<RacerPopup racer={ racer } />)
+  },
+
+  renderWaypointPopup (waypoint) {
+    return React.renderToString(<WaypointPopup waypoint={ waypoint } />)
   },
 
   render () {
