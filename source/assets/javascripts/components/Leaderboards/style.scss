@@ -1,8 +1,14 @@
 .Leaderboards {
-  height: 100%;
   box-sizing: border-box;
-  padding-bottom: 104px;
   padding-top: 16px;
+  box-sizing: border-box;
+  height: calc(100% - 104px);
+}
+
+@media screen and (max-width: 900px) {
+  .Leaderboards {
+    padding-bottom: 34px;
+  }
 }
 
 .Leaderboards__underConstruction {
@@ -10,7 +16,7 @@
   font-family: $font-copy;
   top: 50%;
   height: 100px;
-  margin-top: -100px;
+  margin-top: -50px;
   box-sizing: border-box;
   position: absolute;
   width: 100%;
