@@ -1,6 +1,7 @@
 .tracker {
   position: relative;
   height: 800px;
+  height: 80vh;
 }
 
 .mapWrap {
@@ -16,7 +17,6 @@
   right: 0;
   top: 0;
   bottom: 0;
-  height: 800px;
   box-sizing: border-box;
   position: absolute;
   background-color: #CDD2D4;
@@ -64,6 +64,22 @@
   height: 100%;
 }
 
+.Leaderboard__pagination {
+  padding-top: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -50px;
+}
+
+.hui-LeaderboardRow__charityName {
+  margin: 0;
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .hui-Leaderboard {
   height: 100%;
   overflow-y: scroll;
@@ -72,6 +88,7 @@
 
 .hui-Tabs_content {
   height: 100%;
+  min-height: 200px;
   box-sizing: border-box;
   position: relative;
 }
