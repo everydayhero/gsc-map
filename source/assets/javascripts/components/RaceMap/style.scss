@@ -41,6 +41,38 @@
   margin-top: -50%;
 }
 
-.gsc-MarkerContainer--selected .gsc-Marker {
+.gsc-Marker--racer {
+  background-image: url('../images/pin.png');
+}
+.gsc-Marker--waypoint {
+  background-image: url('../images/waypoint-pin.png');
+}
+
+.gsc-MarkerContainer--selected .gsc-Marker--racer {
   background-image: url('../images/pin-selected.png');
+}
+
+.leaflet-div-icon {
+  background-color: transparent;
+  border: none;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: white;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 2px;
+}
+
+.leaflet-popup-content {
+  margin: 12px 12px;
+}
+
+.gsc-PopupContent {
+  width: 280px;
+  font-size: 14px;
+  color: #444;
 }

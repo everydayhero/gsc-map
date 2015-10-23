@@ -1,0 +1,107 @@
+[
+  {
+    "point": [-27.465245,153.028644],
+    "name": "Brisbane",
+    "image_url": "assets/images/waypoints/brisbane.jpg"
+  },
+  {
+    "point": [-32.728199,151.784682],
+    "name": "Grahamstown Lake",
+    "image_url": "assets/images/waypoints/grahamstown-lake.jpg"
+  },
+  {
+    "point": [-33.852333,151.210812],
+    "name": "Sydney",
+    "image_url": "assets/images/waypoints/sydney.jpg"
+  },
+  {
+    "point": [-34.387102,150.522240],
+    "name": "Colo Vale",
+    "image_url": "assets/images/waypoints/colo-vale.jpg"
+  },
+  {
+    "point": [-35.001152,148.110883],
+    "name": "Dog on the Tucker Box",
+    "image_url": "assets/images/waypoints/dog-on-the-tucker-box.jpg"
+  },
+  {
+    "point": [-36.139044,146.645555],
+    "name": "Chiltern",
+    "image_url": "assets/images/waypoints/chiltern.jpg"
+  },
+  {
+    "point": [-37.817644,144.967105],
+    "name": "Melbourne",
+    "image_url": "assets/images/waypoints/melbourne.jpg"
+  },
+  {
+    "point": [-37.282489,142.931815],
+    "name": "Ararat",
+    "image_url": "assets/images/waypoints/ararat.jpg"
+  },
+  {
+    "point": [-36.357478,141.083789],
+    "name": "Serviceton",
+    "image_url": "assets/images/waypoints/serviceton.jpg"
+  },
+  {
+    "point": [-35.109216,138.975806],
+    "name": "St Ives",
+    "image_url": "assets/images/waypoints/st-ives.jpg"
+  },
+  {
+    "point": [-34.940222,138.624434],
+    "name": "Adelaide",
+    "image_url": "assets/images/waypoints/adelaide.jpg"
+  },
+  {
+    "point": [-33.184856,138.021394],
+    "name": "Port Pirie",
+    "image_url": "assets/images/waypoints/port-pirie.jpg"
+  },
+  {
+    "point": [-31.928627,133.012377],
+    "name": "Penong",
+    "image_url": "assets/images/waypoints/penong.jpg"
+  },
+  {
+    "point": [-31.611057,129.720238],
+    "name": "Eyre Highway",
+    "image_url": "assets/images/waypoints/eyre-highway.jpg"
+  },
+  {
+    "point": [-31.818328,128.225760],
+    "name": "Mundrabilla",
+    "image_url": "assets/images/waypoints/mundrabilla.jpg"
+  },
+  {
+    "point": [-32.269366,125.487190],
+    "name": "Caiguna",
+    "image_url": "assets/images/waypoints/caiguna.jpg"
+  },
+  {
+    "point": [-32.057720,122.994989],
+    "name": "Fraser Range",
+    "image_url": "assets/images/waypoints/fraser-range.jpg"
+  },
+  {
+    "point": [-31.445026,121.563910],
+    "name": "Lake Lefroy",
+    "image_url": "assets/images/waypoints/lake-lefroy.jpg"
+  },
+  {
+    "point": [-31.233382,119.329575],
+    "name": "Southern Cross",
+    "image_url": "assets/images/waypoints/southern-cross.jpg"
+  },
+  {
+    "point": [-31.635410,116.891687],
+    "name": "Meenar",
+    "image_url": "assets/images/waypoints/meenar.jpg"
+  },
+  {
+    "point": [-31.953573,115.857006],
+    "name": "Perth",
+    "image_url": "assets/images/waypoints/perth.jpg"
+  }
+]
