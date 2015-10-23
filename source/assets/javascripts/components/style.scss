@@ -73,4 +73,9 @@
 .hui-Tabs_content {
   height: 100%;
   box-sizing: border-box;
+  position: relative;
+}
+
+.hui-LeaderboardRow__charityName {
+  font-size: 11px;
 }

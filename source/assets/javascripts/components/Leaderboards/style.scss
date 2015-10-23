@@ -4,3 +4,24 @@
   padding-bottom: 104px;
   padding-top: 16px;
 }
+
+.Leaderboards__underConstruction {
+  text-align: center;
+  font-family: $font-copy;
+  top: 50%;
+  height: 100px;
+  margin-top: -100px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+}
+
+.underConstruction__header {
+  margin: 0px;
+  padding-bottom: 25px;
+  color: $grey;
+}
+
+.underConstruction__cta {
+  display: inline-block;
+}
