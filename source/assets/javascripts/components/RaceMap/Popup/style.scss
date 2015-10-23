@@ -45,13 +45,10 @@
 
 .gsc-PopupContent__avatar {
   width: 25%;
-  background-color: #444;
 }
 
-.gsc-PopupContent__avatar:after {
-  content: '';
-  display: block;
-  padding-bottom: 100%;
+.gsc-PopupContent__avatarImage {
+  width: 100%;
 }
 
 .gsc-PopupContent__summary {
