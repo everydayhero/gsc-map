@@ -56,6 +56,7 @@
       "arrowFunctions": true,
       "modules": true,
       "blockBindings": true,
+      "templateStrings": true,
       "jsx": true
     }
   },
