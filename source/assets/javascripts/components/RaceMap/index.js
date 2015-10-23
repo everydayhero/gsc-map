@@ -84,8 +84,7 @@ export default React.createClass({
     let mapContainer = this.getDOMNode()
     let map = L.map(mapContainer)
     let markers = new L.MarkerClusterGroup({
-      showCoverageOnHover: false,
-      disableClusteringAtZoom: 9
+      showCoverageOnHover: false
     })
     map.addLayer(markers)
     let selectedMarker = L.featureGroup()
@@ -160,8 +159,11 @@ export default React.createClass({
       this.setState({
         selectedRacer: id
       }, () => {
-        this.state.map.setView(racer.marker.getLatLng(), 10)
-        racer.marker.openPopup()
+        let marker = racer.marker
+
+        this.state.markers.zoomToShowLayer(marker, function () {
+          marker.openPopup()
+        })
       })
     }
   },

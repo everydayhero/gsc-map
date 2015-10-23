@@ -9,9 +9,9 @@
   "scripts": {
     "data": "mkdir -p dist/assets/data/ && cp -R source/assets/data dist/assets",
     "watch-data": "nodemon -x 'npm run data' -w source/assets/data -e json",
-    "scripts": "mkdir -p dist/assets/javascripts/ && browserify source/assets/javascripts/index.js -o dist/assets/javascripts/index.js && npm run uglify-scripts",
+    "scripts": "mkdir -p dist/assets/javascripts/ && browserify source/assets/javascripts/index.js -o dist/assets/javascripts/index.js && npm run optimize-scripts",
     "watch-scripts": "nodemon -x 'npm run scripts' -w source/assets/javascripts",
-    "uglify-scripts": "uglifyjs -c -- dist/assets/javascripts/index.js > dist/assets/javascripts/index.min.js",
+    "optimize-scripts": "uglifyjs -c -- dist/assets/javascripts/index.js > dist/assets/javascripts/index.min.js && rm -f dist/assets/javascripts/index.min.js.gz && gzip -k dist/assets/javascripts/index.min.js",
     "sass": " rm -f dist/assets/stylesheets/main.css && node-sass --importer ./node_modules/node-sass-globbing -o dist/assets/stylesheets/ source/assets/stylesheets/main.scss",
     "postcss": "postcss -u 'autoprefixer' -u 'postcss-import' -o dist/assets/stylesheets/main.css dist/assets/stylesheets/main.css",
     "styles": "mkdir -p dist/assets/stylesheets/ && npm run sass && npm run postcss",
@@ -22,7 +22,7 @@
     "watch-index": "nodemon -x 'npm run index' -w source -e html",
     "build": "npm run data && npm run scripts && npm run styles && npm run images && npm run index",
     "watch": "npm run watch-data & npm run watch-scripts & npm run watch-styles & npm run watch-images & npm run watch-index",
-    "serve": "static dist",
+    "serve": "static --gzip true dist",
     "dev": "npm run watch & npm run serve",
     "test": "mocha --compilers js:babel/register --recursive source/**/__tests__/**-test.js",
     "deploy": "git-directory-deploy --directory dist --branch gh-pages"
@@ -31,6 +31,7 @@
   "license": "ISC",
   "dependencies": {
     "classlist-polyfill": "^1.0.2",
+    "classnames": "^2.2.0",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.6",
     "hui": "everydayhero/hui",

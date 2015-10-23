@@ -4,8 +4,6 @@ import React from 'react'
 import GSCLeaderMap from './components/GSCLeaderMap'
 import Leaderboards from './components/Leaderboards'
 
-import teamResults from '../data/teams.json'
-
 let Example = React.createClass({
   getInitialState () {
     return {

@@ -48,7 +48,9 @@
 }
 
 .gsc-PopupContent__avatarImage {
+  display: block;
   width: 100%;
+  height: auto;
 }
 
 .gsc-PopupContent__summary {
