@@ -27,6 +27,7 @@ export default React.createClass({
   getInitialState () {
     return {
       hideOverlay: false,
+      inProgress: true,
       teams: []
     }
   },
@@ -41,6 +42,7 @@ export default React.createClass({
 
   onSuccess (response) {
     this.setState({
+      inProgress: false,
       teams: response.results.map((result) => {
         let team = merge({}, result, result.team)
         team.id = team.team_page_id
@@ -51,7 +53,9 @@ export default React.createClass({
   },
 
   onFail (response) {
-
+    this.setState({
+      inProgress: false
+    })
   },
 
   handleOverlayClick () {
@@ -67,6 +71,7 @@ export default React.createClass({
   },
 
   render () {
+    let state = this.state
     let overlayClasses = classnames({
       'GSCLeaderMap__overlay': true,
       'GSCLeaderMap__overlay--closed': !!this.state.hideOverlay
@@ -83,22 +88,25 @@ export default React.createClass({
     })
 
     return (
-      !!this.state.teams.length &&
-        (<div className={ classes }>
-          <RaceMap
-            route={ routeData }
-            onRacerSelection={ this.props.onTeamSelection }
-            selectedRacer={ this.props.selectedTeam }
-            racers={ this.state.teams } />
-          <button
-            onClick={ this.handleOverlayCloseClick}
-            className={ buttonClasses }>
-            <i className="fa fa-close" />
-          </button>
-          <div
-            onClick={ this.handleOverlayClick }
-            className={ overlayClasses } />
-        </div>)
+      <div>
+        { state.inProgress && <div className={ classes }><div className="loadingIndicator"/></div> }
+        { !state.inProgress &&
+          (<div className={ classes }>
+            <RaceMap
+              route={ routeData }
+              onRacerSelection={ this.props.onTeamSelection }
+              selectedRacer={ this.props.selectedTeam }
+              racers={ this.state.teams } />
+            <button
+              onClick={ this.handleOverlayCloseClick}
+              className={ buttonClasses }>
+              <i className="fa fa-close" />
+            </button>
+            <div
+              onClick={ this.handleOverlayClick }
+              className={ overlayClasses } />
+          </div>) }
+      </div>
     )
   }
 })

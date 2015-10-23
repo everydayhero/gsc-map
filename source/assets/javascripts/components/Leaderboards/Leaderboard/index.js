@@ -66,8 +66,8 @@ export default React.createClass({
   getPageData: function() {
     let state = this.state
     let pageLength = 10
-    let to = (pageLength * (state.currentPage + 1)) - 1
-    let from = to - pageLength + 1
+    let to = (pageLength * (state.currentPage + 1))
+    let from = to - pageLength
 
     return state.data.slice(from, to)
   },
@@ -107,7 +107,7 @@ export default React.createClass({
 
     return (
       <div className="Leaderboard">
-        { state.inProgress && 'loading...' }
+        { state.inProgress && <div className="loadingIndicator"/> }
         { !state.inProgress && this.renderLeaderboard() }
       </div>
     )

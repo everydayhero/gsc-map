@@ -10,6 +10,7 @@
   right: 580px;
   top: 0;
   bottom: 0;
+  background-color: #dddddd;
 }
 
 .panelWrap {
@@ -59,6 +60,22 @@
   color: white;
 }
 
+.loadingIndicator {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+  top: 50%;
+  margin-top: -25px;
+  background-image: url('../images/loading-wheel.svg');
+  animation:spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform:rotate(360deg); }
+}
+
 /* move to hui */
 .hui-Tabs {
   height: 100%;
@@ -95,4 +112,19 @@
 
 .hui-LeaderboardRow__charityName {
   font-size: 11px;
+}
+
+.hui-Pagination__pager {
+  color: #B3B3B3;
+  border-color: #B3B3B3;
+}
+
+.hui-Pagination__pager--disabled, .hui-Pagination__pager--disabled:hover {
+  border-color: #585858;
+  color: #585858;
+}
+
+/* I know what you're thinking */
+.hui-LeaderboardRow__ctas .hui-Button:nth-child(2) {
+  display: none;
 }
