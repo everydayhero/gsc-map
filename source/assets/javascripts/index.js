@@ -4,6 +4,10 @@ import React from 'react'
 import GSCLeaderMap from './components/GSCLeaderMap'
 import Leaderboards from './components/Leaderboards'
 
+let campaignId = 'au-19283'
+let domain = 'everydayhero.com'
+let startAt = '2015-10-31T14:00:00Z'
+
 let Example = React.createClass({
   getInitialState () {
     return {
@@ -51,13 +55,21 @@ let Example = React.createClass({
       <div className="tracker">
         <div className="mapWrap">
           <GSCLeaderMap
+            domain={ domain }
+            campaignId={ campaignId }
+            startAt={ startAt }
             onTeamSelection={ this.handleTeamSelection }
             selectedTeam={ this.state.selectedTeam } />
         </div>
         <div className="panelWrap">
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
-            <Leaderboards onSelect={ this.onSelect } onDeSelect={ this.onDeSelect }/>
+            <Leaderboards
+              onSelect={ this.onSelect }
+              onDeSelect={ this.onDeSelect }
+              domain={ domain }
+              campaignId={ campaignId }
+              startAt={ startAt } />
           </div>
         </div>
       </div>

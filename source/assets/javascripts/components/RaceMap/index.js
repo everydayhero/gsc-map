@@ -101,7 +101,14 @@ export default React.createClass({
       map.on('popupopen', this.handlePopupOpen)
       map.on('popupclose', this.handlePopupClose)
       this.renderRoute()
-      this.renderRacers(this.props.racers)
+      if (this.props.racers.length) {
+        this.renderRacers(this.props.racers)
+      } else {
+        let routePoints =  this.props.route.map(routeDatum => routeDatum.point)
+        this.state.map.fitBounds(routePoints, {
+          padding: [50, 50]
+        })
+      }
     })
   },
 
