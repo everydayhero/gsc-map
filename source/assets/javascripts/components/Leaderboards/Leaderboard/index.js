@@ -4,8 +4,6 @@ import React       from 'react'
 import Leaderboard from 'hui/leaderboard'
 import LeaderboardRow from 'hui/leaderboard/LeaderboardRow'
 import Pagination from 'hui/navigation/Pagination'
-import getJSON from 'hui/lib/getJSON'
-import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'Leaderboard',
@@ -17,45 +15,19 @@ export default React.createClass({
 
   getInitialState: function() {
     return {
-      currentPage: 0,
-      inProgress: true,
-      count: 0,
-      data: [],
-      valueSymbol: '$',
-      valueType: 'money',
-      dataPath: 'leaderboard.pages'
+      currentPage: 0
     }
   },
 
   getDefaultProps: function() {
     return {
-      params: {}
+      params: {},
+      inProgress: true,
+      count: 0,
+      data: [],
+      valueSymbol: '$',
+      valueType: 'money'
     }
-  },
-
-  componentDidMount: function() {
-    let props = this.props
-    getJSON(props.url, props.params).then(this.onSuccess, this.onFail)
-  },
-
-  onSuccess: function(response) {
-    let data = _.get(response, this.state.dataPath)
-    data.forEach(function(item, index) {
-      item.rank = index + 1
-    })
-
-    this.setState({
-      data,
-      inProgress: false,
-      count: Math.ceil(data.length / 10)
-    })
-  },
-
-  onFail: function(error) {
-    this.setState({
-      error,
-      inProgress: false
-    })
   },
 
   onPage: function(increment) {
@@ -69,7 +41,7 @@ export default React.createClass({
     let to = (pageLength * (state.currentPage + 1))
     let from = to - pageLength
 
-    return state.data.slice(from, to)
+    return this.props.data.slice(from, to)
   },
 
   onSelect: function(page) {
@@ -90,25 +62,26 @@ export default React.createClass({
       <div className="Leaderboard__leaderboard">
         <Leaderboard
           {...state}
+          {...this.props}
           onSelect={ this.onSelect }
           onDeSelect={ this.props.onDeSelect }
           selectedIndex={ this.props.selectedIndex }
           rowData={ this.getPageData() }
           rowComponent={ LeaderboardRow } />
           <div className="Leaderboard__pagination">
-            <Pagination {...state} onChange={ this.onPage } />
+            <Pagination {...this.props} {...state} onChange={ this.onPage } />
           </div>
       </div>
     )
   },
 
   render: function() {
-    let state = this.state
+    let props = this.props
 
     return (
       <div className="Leaderboard">
-        { state.inProgress && <div className="loadingIndicator"/> }
-        { !state.inProgress && this.renderLeaderboard() }
+        { props.inProgress && <div className="loadingIndicator"/> }
+        { !props.inProgress && this.renderLeaderboard() }
       </div>
     )
   }

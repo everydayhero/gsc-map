@@ -1,8 +1,17 @@
-.Leaderboard, .Leaderboard__leaderboard {
+.Leaderboard,
+.Leaderboard__leaderboard,
+.RaisedLeaderboard,
+.DistanceLeaderboard,
+.ElevationLeaderboard {
   height: 100%;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .Leaderboard__pagination {
-  padding-top: 10px;
+  padding-top: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -50px;
 }
