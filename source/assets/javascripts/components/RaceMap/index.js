@@ -173,7 +173,7 @@ export default React.createClass({
     if (focus === true) {
       this.showRacer(selectedRacer, focus)
     } else {
-      selectedRacer.marker.closePopup()
+      !!selectedRacer && selectedRacer.marker.closePopup()
       this.fitToRacers()
     }
   },

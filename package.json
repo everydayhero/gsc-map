@@ -23,7 +23,7 @@
     "watch-index": "nodemon -x 'npm run index' -w source -e html",
     "build": "npm run data && npm run scripts && npm run styles && npm run images && npm run index",
     "watch": "npm run watch-data & npm run watch-scripts & npm run watch-styles & npm run watch-images & npm run watch-index",
-    "serve": "static --gzip true dist",
+    "serve": "static dist",
     "dev": "npm run watch & npm run serve",
     "test": "mocha --compilers js:babel/register --recursive source/**/__tests__/**-test.js",
     "deploy": "git-directory-deploy --directory dist --branch gh-pages"
