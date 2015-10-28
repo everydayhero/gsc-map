@@ -21,6 +21,14 @@ export default React.createClass({
     }
   },
 
+  getInitialState: function() {
+    return {
+      data: [],
+      inProgress: true,
+      count: 0
+    }
+  },
+
   componentDidMount: function() {
     let props = this.props
     getJSON(props.url, props.params).then(this.onSuccess, this.onFail)
@@ -35,6 +43,8 @@ export default React.createClass({
 
       return team
     })
+
+    data = data || []
 
     this.setState({
       data,
