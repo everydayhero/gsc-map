@@ -34,7 +34,10 @@
     width: initial;
   }
   .mapWrap {
-    height: 500px;
+    height: 40vh;
+  }
+  .mapWrap--active {
+    height: 60vh;
   }
   .panelWrap {
     height: auto;
