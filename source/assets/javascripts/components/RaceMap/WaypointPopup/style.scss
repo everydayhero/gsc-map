@@ -1,5 +1,19 @@
+.gsc-PopupContent--waypoint {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-bottom: 83.21428571%;
+    background-color: whitesmoke;
+  }
+}
+
 .gsc-PopupContent__img {
   width: 100%;
   height: auto;
   display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
 }

@@ -6,7 +6,7 @@ export default React.createClass({
   },
   render () {
     return (
-      <div className="gsc-PopupContent">
+      <div className="gsc-PopupContent gsc-PopupContent--waypoint">
         <img className="gsc-PopupContent__img" src={ this.props.waypoint.image_url } />
       </div>
     )
