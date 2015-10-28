@@ -53,13 +53,14 @@
       "node": true
     },
     "ecmaFeatures": {
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "destructuring": true,
+      "jsx": true,
+      "modules": true,
       "objectLiteralShorthandMethods": true,
       "objectLiteralShorthandProperties": true,
-      "arrowFunctions": true,
-      "modules": true,
-      "blockBindings": true,
-      "templateStrings": true,
-      "jsx": true
+      "templateStrings": true
     }
   },
   "devDependencies": {
