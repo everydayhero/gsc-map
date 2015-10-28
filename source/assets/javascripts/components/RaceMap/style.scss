@@ -57,6 +57,26 @@
   border: none;
 }
 
+.leaflet-container a.leaflet-popup-close-button {
+  right: 0.25em;
+  top: 0.25em;
+  border: thin solid whitesmoke;
+  padding: 0;
+  background-color: white;
+  height: 2em;
+  width: 2em;
+  font: inherit;
+  line-height: 2em;
+  text-align: center;
+  border-radius: 100%;
+  z-index: 2;
+
+  &:hover {
+    background-color: whitesmoke;
+    color: black;
+  }
+}
+
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background: white;
