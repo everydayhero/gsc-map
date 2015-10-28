@@ -28,6 +28,7 @@ const NullRouteDatum = {
 
 export default React.createClass({
   propTypes: {
+    hasFocus: React.PropTypes.bool,
     racers: React.PropTypes.array,
     route: React.PropTypes.array.isRequired,
     waypoints: React.PropTypes.array,
@@ -36,6 +37,7 @@ export default React.createClass({
 
   getDefaultProps () {
     return {
+      hasFocus: false,
       racers: [],
       route: [],
       waypoints: [],
@@ -134,9 +136,45 @@ export default React.createClass({
     return false
   },
 
+  fitToRacers () {
+    let points = this.state.racers.map((racer) => racer.marker.getLatLng())
+    if (points.length) {
+      this.state.map.fitBounds(points, {
+        padding: [50, 50]
+      })
+    }
+  },
+
+  isSelectedRacer (id) {
+    return id.toString() === (this.state.selectedRacer && this.state.selectedRacer.toString())
+  },
+
   componentWillReceiveProps (nextProps) {
-    if (nextProps.selectedRacer.toString() !== (this.state.selectedRacer && this.state.selectedRacer.toString())) {
+    if (nextProps.hasFocus !== this.props.hasFocus) {
+      this.setFocus(nextProps.hasFocus)
+    }
+
+    if (!this.isSelectedRacer(nextProps.selectedRacer)) {
       this.selectRacer(nextProps.selectedRacer)
+    }
+  },
+
+  getSelectedRacer () {
+    return this.state.racers.find((racer) => {
+      return this.isSelectedRacer(racer.id)
+    })
+  },
+
+  setFocus (focus) {
+    let { map } = this.state
+    map.invalidateSize()
+    let selectedRacer = this.getSelectedRacer()
+
+    if (focus === true) {
+      this.showRacer(selectedRacer, focus)
+    } else {
+      selectedRacer.marker.closePopup()
+      this.fitToRacers()
     }
   },
 
@@ -171,11 +209,24 @@ export default React.createClass({
     return [toDeg(racerLat), toDeg(racerLon)]
   },
 
-  selectRacer (id) {
-    let selectedRacer = this.state.selectedRacer
-    let previousRacer = find(this.state.racers, (racer) => {
-      return racer.id.toString() === (selectedRacer && selectedRacer.toString())
+  showRacer (racer, focus) {
+    if (!racer) return
+
+    let marker = racer.marker
+
+    console.log(racer)
+
+    this.state.markers.zoomToShowLayer(marker, function () {
+      if (focus) {
+        marker.openPopup()
+      } else {
+        marker._icon.classList.add('gsc-MarkerContainer--selected')
+      }
     })
+  },
+
+  selectRacer (id) {
+    let previousRacer = this.getSelectedRacer()
     if (previousRacer) {
       previousRacer.marker.closePopup()
     }
@@ -184,28 +235,17 @@ export default React.createClass({
       this.setState({
         selectedRacer: id
       }, () => {
-        let marker = racer.marker
-
-        this.state.markers.zoomToShowLayer(marker, function () {
-          marker.openPopup()
-        })
+        this.showRacer(racer, this.props.hasFocus)
       })
     }
   },
 
   racersUpdated () {
-    let selectedRacer = find(this.state.racers, (racer) => {
-      return racer.id.toString() === (this.props.selectedRacer && this.props.selectedRacer.toString())
-    })
+    let selectedRacer = this.getSelectedRacer()
     if (selectedRacer) {
       this.selectRacer(selectedRacer.id)
     } else {
-      let points = this.state.racers.map((racer) => racer.marker.getLatLng())
-      if (points.length) {
-        this.state.map.fitBounds(points, {
-          padding: [50, 50]
-        })
-      }
+      this.fitToRacers()
     }
   },
 
