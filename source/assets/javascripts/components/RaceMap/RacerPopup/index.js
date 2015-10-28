@@ -65,7 +65,7 @@ export default React.createClass({
           href={ team.url }
           className="gsc-PopupContent__call-to-action"
           kind="primary">
-          Give to { team.name }
+          Give
         </HuiButton>
       </div>
     )

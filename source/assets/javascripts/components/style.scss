@@ -84,14 +84,6 @@
   height: 100%;
 }
 
-.Leaderboard__pagination {
-  padding-top: 0;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  bottom: -50px;
-}
-
 .hui-LeaderboardRow__charityName {
   margin: 0;
   max-width: 80%;
@@ -125,6 +117,14 @@
 .hui-Pagination__pager--disabled, .hui-Pagination__pager--disabled:hover {
   border-color: #585858;
   color: #585858;
+}
+
+.hui-LeaderboardRow__rank {
+  width: 72px;
+}
+
+.hui-LeaderboardRow__value {
+  font-size: 16px;
 }
 
 /* I know what you're thinking */

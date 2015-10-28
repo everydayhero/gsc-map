@@ -2,8 +2,9 @@
 
 import React from 'react'
 import Tabs from 'hui/navigation/Tabs'
-import Button from 'hui/buttons/Button'
-import Leaderboard from './Leaderboard'
+import RaisedLeaderboard from './RaisedLeaderboard'
+import DistanceLeaderboard from './DistanceLeaderboard'
+import ElevationLeaderboard from './ElevationLeaderboard'
 import apiRoutes from '../../lib/apiRoutes'
 import _ from 'lodash'
 
@@ -34,29 +35,30 @@ export default React.createClass({
   render: function() {
     let state = this.state
     let props = this.props
-    let underConstruction = (
-          <div key="distance" className="Leaderboards__underConstruction">
-            <h2 className="underConstruction__header">
-              Official ride commences Nov 1st 2015
-            </h2>
-            <div className="underConstruction__cta">
-              <Button kind="cta" href="https://greatsoutherncrossing.everydayhero.com/au/get-started">Sign Up</Button>
-            </div>
-          </div>
-        )
-
     let tabs = [
       {
         label: 'Raised',
-        content: <Leaderboard key="raised" url={ apiRoutes.get('raised', props) } onSelect={ props.onSelect } onDeSelect={ props.onDeSelect }/>
+        content: <RaisedLeaderboard
+          key="raised"
+          url={ apiRoutes.get('raised', props) }
+          onSelect={ props.onSelect }
+          onDeSelect={ props.onDeSelect }/>
       },
       {
         label: 'Distance',
-        content: underConstruction
+        content: <DistanceLeaderboard
+          key="distance"
+          url={ apiRoutes.get('distance', props) }
+          onSelect={ props.onSelect }
+          onDeSelect={ props.onDeSelect }/>
       },
       {
         label: 'Elevation',
-        content: underConstruction
+        content: <ElevationLeaderboard
+          key="elevation"
+          url={ apiRoutes.get('elevation', props) }
+          onSelect={ props.onSelect }
+          onDeSelect={ props.onDeSelect }/>
       }
     ]
 
