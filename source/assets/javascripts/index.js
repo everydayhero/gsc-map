@@ -6,7 +6,7 @@ import Leaderboards from './components/Leaderboards'
 
 let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
-let startAt = '2015-10-10T14:00:00Z'
+let startAt = '2015-10-20T14:00:00Z'
 
 let Example = React.createClass({
   getInitialState () {

@@ -4,6 +4,7 @@ import React       from 'react'
 import Leaderboard from 'hui/leaderboard'
 import LeaderboardRow from 'hui/leaderboard/LeaderboardRow'
 import Pagination from 'hui/navigation/Pagination'
+import EmptyState from '../EmptyState'
 
 export default React.createClass({
   displayName: 'Leaderboard',
@@ -57,6 +58,11 @@ export default React.createClass({
 
   renderLeaderboard: function() {
     let state = this.state
+    let props = this.props
+
+    if(props.data.length === 0) {
+      return <EmptyState/>
+    }
 
     return (
       <div className="Leaderboard__leaderboard">
