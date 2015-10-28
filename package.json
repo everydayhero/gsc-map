@@ -9,8 +9,9 @@
   "scripts": {
     "data": "mkdir -p dist/assets/data/ && cp -R source/assets/data dist/assets",
     "watch-data": "nodemon -x 'npm run data' -w source/assets/data -e json",
+    "scripts-dev": "mkdir -p dist/assets/javascripts/ && browserifyinc source/assets/javascripts/index.js -o dist/assets/javascripts/index.min.js -v",
     "scripts": "mkdir -p dist/assets/javascripts/ && browserify source/assets/javascripts/index.js -o dist/assets/javascripts/index.js && npm run optimize-scripts",
-    "watch-scripts": "nodemon -x 'npm run scripts' -w source/assets/javascripts",
+    "watch-scripts": "nodemon -x 'npm run scripts-dev' -w source/assets/javascripts",
     "optimize-scripts": "uglifyjs -c -- dist/assets/javascripts/index.js > dist/assets/javascripts/index.min.js && rm -f dist/assets/javascripts/index.min.js.gz && gzip -k dist/assets/javascripts/index.min.js",
     "sass": " rm -f dist/assets/stylesheets/main.css && node-sass --importer ./node_modules/node-sass-globbing -o dist/assets/stylesheets/ source/assets/stylesheets/main.scss",
     "postcss": "postcss -u 'autoprefixer' -u 'postcss-import' -o dist/assets/stylesheets/main.css dist/assets/stylesheets/main.css",
@@ -66,6 +67,7 @@
     "babel": "^5.8.23",
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
+    "browserify-incremental": "^3.0.1",
     "chai": "^3.3.0",
     "git-directory-deploy": "^1.3.0",
     "jsdom": "^3.1.2",
