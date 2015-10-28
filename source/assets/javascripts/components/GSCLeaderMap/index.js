@@ -21,7 +21,7 @@ export default React.createClass({
       selectedTeam: '',
       onTeamSelection: () => {},
       campaignId: 'au-6839',
-      domain: 'everydayhero-staging.com'
+      domain: 'everydayhero.com'
     }
   },
 
@@ -29,6 +29,7 @@ export default React.createClass({
     return {
       hideOverlay: false,
       inProgress: true,
+      onFocusChange: () => {},
       teams: []
     }
   },
@@ -60,12 +61,14 @@ export default React.createClass({
   },
 
   handleOverlayClick () {
+    this.props.onFocusChange(true)
     this.setState({
       hideOverlay: true
     })
   },
 
   handleOverlayCloseClick () {
+    this.props.onFocusChange(false)
     this.setState({
       hideOverlay: false
     })
@@ -94,6 +97,7 @@ export default React.createClass({
         { !state.inProgress &&
           (<div className={ classes }>
             <RaceMap
+              hasFocus={ state.hideOverlay }
               route={ routeData }
               waypoints={ waypoints }
               onRacerSelection={ this.props.onTeamSelection }
