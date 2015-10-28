@@ -214,8 +214,6 @@ export default React.createClass({
 
     let marker = racer.marker
 
-    console.log(racer)
-
     this.state.markers.zoomToShowLayer(marker, function () {
       if (focus) {
         marker.openPopup()
@@ -225,11 +223,20 @@ export default React.createClass({
     })
   },
 
-  selectRacer (id) {
-    let previousRacer = this.getSelectedRacer()
-    if (previousRacer) {
-      previousRacer.marker.closePopup()
+  hideRacer (racer, focus) {
+    if (!(racer && racer.marker && racer.marker._icon)) return
+
+    let marker = racer.marker
+
+    if (focus) {
+      marker.closePopup()
+    } else {
+      marker._icon.classList.remove('gsc-MarkerContainer--selected')
     }
+  },
+
+  selectRacer (id) {
+    this.hideRacer(this.getSelectedRacer(), this.props.hasFocus)
     let racer = find(this.state.racers, racer => racer.id.toString() === id.toString())
     if (racer) {
       this.setState({
