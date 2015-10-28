@@ -15,12 +15,39 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: transparent;
+  background-color: rgba(#3f434a, 0.3);
   transition: background-color 0.5s ease;
+
+  &:after {
+    content: 'Click to pan and zoom';
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(#3f434a, 0.7);
+    border-radius: $border-radius;
+    display: block;
+    @extend %general-reset;
+    font-size: 24px;
+    line-height: 1.25em;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+  }
 }
 
-.GSCLeaderMap__overlay:hover {
-  background-color: rgba(#3f434a, 0.3);
+@media screen and (min-width: 900px) {
+  .GSCLeaderMap__overlay {
+    background-color: transparent;
+
+    &:after {
+      display: none;
+    }
+  }
+  .GSCLeaderMap__overlay:hover {
+    background-color: rgba(#3f434a, 0.3);
+    &:after { display: block }
+  }
 }
 
 .GSCLeaderMap__overlay--closed {
