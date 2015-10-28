@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import classnames from 'classnames'
 import GSCLeaderMap from './components/GSCLeaderMap'
 import Leaderboards from './components/Leaderboards'
 
@@ -42,14 +43,27 @@ let Example = React.createClass({
     clearTimeout(this.waitOut)
   },
 
+  handleMapFocusChange (activeState) {
+    this.setState({
+      mapActive: activeState
+    })
+  },
+
   render () {
+    let { mapActive } = this.state
+    let mapWrapClasses = classnames({
+      'mapWrap': true,
+      'mapWrap--active': !!mapActive
+    })
+
     return (
       <div className="tracker">
-        <div className="mapWrap">
+        <div className={ mapWrapClasses }>
           <GSCLeaderMap
             domain={ domain }
             campaignId={ campaignId }
             startAt={ startAt }
+            onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
             selectedTeam={ this.state.selectedTeam } />
         </div>
