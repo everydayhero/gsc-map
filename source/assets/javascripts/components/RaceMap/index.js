@@ -91,7 +91,8 @@ export default React.createClass({
     this.setState({
       map,
       waypoints,
-      markers
+      markers,
+      racers: []
     }, () => {
       L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -252,7 +253,7 @@ export default React.createClass({
 
   renderRacers (racers) {
     this.setState({
-      racers: racers.map((racer) => {
+      racers: (racers || []).map((racer) => {
         let point = this.calcRacerPosition(racer.distance_in_meters)
         let popup = this.renderRacerPopup(racer)
         let marker = L.marker(point, { icon: racerIcon })
