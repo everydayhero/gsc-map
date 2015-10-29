@@ -11,6 +11,7 @@ import 'es6-shim'
 const routeData = JSON.parse(routeString)
 
 export default React.createClass({
+
   propTypes: {
     selectedTeam: React.PropTypes.string,
     onTeamSelection: React.PropTypes.func
