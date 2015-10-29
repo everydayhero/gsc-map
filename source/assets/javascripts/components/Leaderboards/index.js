@@ -21,9 +21,15 @@ export default React.createClass({
 
   getDefaultProps: function() {
     return {
+      groupBy: 'teams',
+      type: 'team',
       campaignId: 'au-6839',
       domain: 'everydayhero-staging.com'
     }
+  },
+
+  getApiRoute (key, params) {
+    return apiRoutes.get(key, params)
   },
 
   handleChange: function(active) {
@@ -40,7 +46,7 @@ export default React.createClass({
         label: 'Raised',
         content: <RaisedLeaderboard
           key="raised"
-          url={ apiRoutes.get('raised', props) }
+          url={ this.getApiRoute('raised', props) }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       },
@@ -48,7 +54,7 @@ export default React.createClass({
         label: 'Distance',
         content: <DistanceLeaderboard
           key="distance"
-          url={ apiRoutes.get('distance', props) }
+          url={ this.getApiRoute('distance', props) }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       },
@@ -56,7 +62,7 @@ export default React.createClass({
         label: 'Elevation',
         content: <ElevationLeaderboard
           key="elevation"
-          url={ apiRoutes.get('elevation', props) }
+          url={ this.getApiRoute('elevation', props) }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       }

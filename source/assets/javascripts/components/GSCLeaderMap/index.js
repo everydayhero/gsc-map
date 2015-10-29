@@ -39,7 +39,9 @@ export default React.createClass({
   },
 
   fetchTeams () {
-    getJSON(apiRoutes.get('distance', this.props)).then(this.onSuccess, this.onFail)
+    let params = this.props
+    params.groupBy = 'teams'
+    getJSON(apiRoutes.get('distance', params)).then(this.onSuccess, this.onFail)
   },
 
   onSuccess (response) {

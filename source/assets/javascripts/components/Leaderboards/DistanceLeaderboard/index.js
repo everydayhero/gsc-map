@@ -34,6 +34,17 @@ export default React.createClass({
     getJSON(props.url, props.params).then(this.onSuccess, this.onFail)
   },
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.url === this.props.url) return
+
+    this.setState({
+      inProgress: true
+    }, () => {
+      getJSON(nextProps.url, this.props.params)
+        .then(this.onSuccess, this.onFail)
+    })
+  },
+
   onSuccess: function(response) {
     let data = response.results.map((result, index) => {
       let entity = merge({}, result, result.team, result.page)
