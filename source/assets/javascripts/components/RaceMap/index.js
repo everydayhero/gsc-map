@@ -50,17 +50,8 @@ export default React.createClass({
     let popup = marker.getPopup()
     let px = map.project(popup._latlng)
     px.y -= popup._container.clientHeight / 2
-    let markers = this.state.markers
-    let selectedMarker = this.state.selectedMarker
-    map.off('popupclose', this.handlePopupClose)
-    map.off('popupopen', this.handlePopupOpen)
-    markers.removeLayer(marker)
-    selectedMarker.addLayer(marker)
     marker._icon.classList.add('gsc-MarkerContainer--selected')
     map.panTo(map.unproject(px))
-    marker.openPopup()
-    map.on('popupclose', this.handlePopupClose)
-    map.on('popupopen', this.handlePopupOpen)
     this.setState({
       selectedRacer: marker.racer_id
     }, () => {
@@ -77,15 +68,8 @@ export default React.createClass({
   },
 
   closeRacerPopup (marker) {
-    let map = this.state.map
-    let markers = this.state.markers
-    let selectedMarker = this.state.selectedMarker
-    map.off('popupclose', this.handlePopupClose)
-    selectedMarker.clearLayers()
-    markers.addLayer(marker)
     let icon = marker._icon
     !!icon && icon.classList.remove('gsc-MarkerContainer--selected')
-    map.on('popupclose', this.handlePopupClose)
   },
 
   handlePopupClose (e) {
@@ -101,18 +85,13 @@ export default React.createClass({
     let map = L.map(mapContainer)
     let waypoints = new L.FeatureGroup()
     map.addLayer(waypoints)
-    let markers = new L.MarkerClusterGroup({
-      showCoverageOnHover: false
-    })
+    let markers = new L.FeatureGroup()
     map.addLayer(markers)
-    let selectedMarker = L.featureGroup()
-    map.addLayer(selectedMarker)
 
     this.setState({
       map,
       waypoints,
-      markers,
-      selectedMarker
+      markers
     }, () => {
       L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -213,20 +192,20 @@ export default React.createClass({
     if (!racer) return
 
     let marker = racer.marker
+    marker.setZIndexOffset(1000)
 
-    this.state.markers.zoomToShowLayer(marker, function () {
-      if (focus) {
-        marker.openPopup()
-      } else {
-        marker._icon.classList.add('gsc-MarkerContainer--selected')
-      }
-    })
+    if (focus) {
+      marker.openPopup()
+    } else {
+      marker._icon.classList.add('gsc-MarkerContainer--selected')
+    }
   },
 
   hideRacer (racer, focus) {
     if (!(racer && racer.marker && racer.marker._icon)) return
 
     let marker = racer.marker
+    marker.setZIndexOffset(0)
 
     if (focus) {
       marker.closePopup()
