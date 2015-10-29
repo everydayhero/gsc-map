@@ -2,6 +2,10 @@
   position: relative;
   height: 800px;
   height: 80vh;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .mapWrap {
@@ -58,9 +62,16 @@
   font-family: $font-copy;
   text-align: center;
   margin: 0px;
+  margin-bottom: 10px;
   font-weight: 300;
   text-transform: uppercase;
   color: white;
+}
+
+.tracker__select {
+  margin-bottom: 10px;
+  float: left;
+  width: 100%;
 }
 
 .loadingIndicator {

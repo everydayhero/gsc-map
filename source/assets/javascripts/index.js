@@ -1,18 +1,33 @@
 'use strict'
 
 import React from 'react'
+import SelectInput from 'hui/forms/SelectInput'
 import classnames from 'classnames'
 import GSCLeaderMap from './components/GSCLeaderMap'
 import Leaderboards from './components/Leaderboards'
 
-let campaignId = 'au-19283'
-let domain = 'everydayhero.com'
-let startAt = '2015-10-20T14:00:00Z'
+const campaignId = 'au-19283'
+const domain = 'everydayhero.com'
+const startAt = '2015-10-20T14:00:00Z'
+
+const showMap = {
+  individuals: {
+    groupBy: 'pages',
+    type: 'individual'
+  },
+  teams: {
+    groupBy: 'teams',
+    type: 'team'
+  }
+}
 
 let Example = React.createClass({
   getInitialState () {
     return {
-      selectedTeam: ''
+      selectedTeam: '',
+      groupBy: 'teams',
+      type: 'team',
+      show: 'teams'
     }
   },
 
@@ -49,8 +64,17 @@ let Example = React.createClass({
     })
   },
 
+  handleShowChange (show) {
+    let showState = showMap[show]
+
+    !!showState && this.setState({
+      ...showState,
+      show
+    })
+  },
+
   render () {
-    let { mapActive } = this.state
+    let { mapActive, show, groupBy, type } = this.state
     let mapWrapClasses = classnames({
       'mapWrap': true,
       'mapWrap--active': !!mapActive
@@ -70,10 +94,23 @@ let Example = React.createClass({
         <div className="panelWrap">
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
+            <div className="tracker__select">
+              <SelectInput
+                onChange={ this.handleShowChange }
+                spacing="compact"
+                label="Show"
+                value={ show }
+                options={[
+                  { value: 'teams', label: 'Teams' },
+                  { value: 'individuals', label: 'Individuals' }
+                ]} />
+            </div>
             <Leaderboards
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
+              groupBy={ groupBy }
+              type={ type }
               campaignId={ campaignId }
               startAt={ startAt } />
           </div>
