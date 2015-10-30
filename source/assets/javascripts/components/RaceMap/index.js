@@ -146,7 +146,7 @@ export default React.createClass({
   },
 
   setFocus (focus) {
-    let { map } = this.state
+    let { map, waypoints } = this.state
     map.invalidateSize()
     let selectedRacer = this.getSelectedRacer()
 
@@ -154,6 +154,9 @@ export default React.createClass({
       this.showRacer(selectedRacer, focus)
     } else {
       !!selectedRacer && selectedRacer.marker.closePopup()
+      waypoints.eachLayer((layer) => {
+        layer.closePopup()
+      })
       this.fitToRacers()
     }
   },
