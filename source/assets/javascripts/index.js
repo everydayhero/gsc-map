@@ -6,13 +6,10 @@ import Router from 'react-router'
 import RouteHandler from './components/RouteHandler'
 let Route = Router.Route;
 let NotFoundRoute = Router.NotFoundRoute;
-
-var router;
-
-var routes = (
+let routes = (
   <Route name="root" path="/" handler={ CampaignTracker }>
-    <Route name="tracker" path="tracker" handler={ CampaignTracker } />
-    <Route name="team" path="tracker/team/:teamId" handler={ CampaignTracker } />
+    <Route name="tracker" path="tracker" handler={ CampaignTracker }/>
+    <Route name="team" path="tracker/team/:teamId" handler={ CampaignTracker }/>
     <NotFoundRoute handler={ RouteHandler } />
   </Route>
 );
@@ -20,9 +17,12 @@ var routes = (
 window.renderTracker = function(id, teamPageIds) {
   teamPageIds = teamPageIds|| [];
 
-  router = Router.create({
+  let router = Router.create({
     routes: routes,
-    location: Router.HashLocation
+    location: Router.HashLocation,
+    scrollBehavior: {
+      updateScrollPosition: function(){}
+    }
   });
 
   router.run(function(Handler) {

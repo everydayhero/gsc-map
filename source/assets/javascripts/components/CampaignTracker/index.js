@@ -10,7 +10,7 @@ let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
 let startAt = '2015-10-31T14:00:00Z'
 
-let Example = React.createClass({
+export default React.createClass({
   mixins: [Router.State, Router.Navigation],
 
   getInitialState () {
@@ -64,7 +64,7 @@ let Example = React.createClass({
             startAt={ startAt }
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
-            selectedTeam={ this.state.selectedTeam }
+            selectedTeam={ this.getParams().teamId }
             teamPageIds={ this.props.teamPageIds } />
         </div>
         <div className="panelWrap">

@@ -87,8 +87,6 @@ export default React.createClass({
 
   handlePopupClose (e) {
     let marker = e.popup._source
-    console.log('close')
-    this.transitionTo('tracker' )
 
     if (marker.racer_id) {
       this.closeRacerPopup(marker)
