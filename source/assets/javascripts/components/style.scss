@@ -31,9 +31,10 @@
     right: 0;
     top: 0;
     bottom: 0;
-    width: initial;
+    width: 100%;
   }
   .mapWrap {
+    height: 300px;
     height: 40vh;
   }
   .mapWrap--active {
