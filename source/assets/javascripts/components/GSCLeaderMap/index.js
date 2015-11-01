@@ -2,7 +2,6 @@ import React from 'react'
 import classnames from 'classnames'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
-import waypoints from '../../../data/waypoints.json'
 import routeString from '../../../data/route.js'
 import apiRoutes from '../../lib/apiRoutes'
 import getJSON from 'hui/lib/getJSON'
@@ -99,7 +98,6 @@ export default React.createClass({
             <RaceMap
               hasFocus={ state.hideOverlay }
               route={ routeData }
-              waypoints={ waypoints }
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />
