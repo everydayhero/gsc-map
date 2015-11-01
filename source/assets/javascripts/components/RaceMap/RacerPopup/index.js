@@ -31,7 +31,7 @@ export default React.createClass({
             <div className="gsc-PopupContent__attribute-list">
               <div className="gsc-PopupContent__attribute">
                 <span className="gsc-PopupContent__attribute-name">
-                  has rode
+                  has cycled
                 </span>
                 <span className="gsc-PopupContent__attribute-value">
                   { this.formatDistance(team.distance_in_meters) }km
