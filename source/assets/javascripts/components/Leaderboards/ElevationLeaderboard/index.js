@@ -4,6 +4,7 @@ import React       from 'react'
 import Leaderboard from '../Leaderboard'
 import getJSON from 'hui/lib/getJSON'
 import merge from 'lodash/object/merge'
+import filterTeams from '../../../lib/filterTeams'
 import _ from 'lodash'
 
 export default React.createClass({
@@ -45,6 +46,8 @@ export default React.createClass({
     })
 
     data = data || []
+
+    data = filterTeams(this.props.teamPageIds, data)
 
     this.setState({
       data,

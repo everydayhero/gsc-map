@@ -65,17 +65,23 @@ let Example = React.createClass({
             startAt={ startAt }
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
-            selectedTeam={ this.state.selectedTeam } />
+            selectedTeam={ this.state.selectedTeam }
+            teamPageIds={ this.props.teamPageIds } />
         </div>
         <div className="panelWrap">
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
+            <div className="panel_instructions">
+              <p>As each team logs their rides, their marker will move along the course.</p>
+              <p>Select a team to view their progress.</p>
+            </div>
             <Leaderboards
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
               campaignId={ campaignId }
-              startAt={ startAt } />
+              startAt={ startAt }
+              teamPageIds={ this.props.teamPageIds } />
           </div>
         </div>
       </div>
@@ -83,6 +89,8 @@ let Example = React.createClass({
   }
 })
 
-window.renderTracker = function(id) {
-  React.render(<Example />, document.getElementById(id))
+window.renderTracker = function(id, teamPageIds) {
+  teamPageIds = teamPageIds|| [];
+
+  React.render(<Example teamPageIds={ teamPageIds }/>, document.getElementById(id))
 }
