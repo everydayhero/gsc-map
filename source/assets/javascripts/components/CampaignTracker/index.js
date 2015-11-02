@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
+import scrollTo from '../../lib/scrollTo'
 
 let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
@@ -12,6 +13,21 @@ let startAt = '2015-10-31T14:00:00Z'
 
 export default React.createClass({
   mixins: [Router.State, Router.Navigation],
+
+  componentDidMount () {
+    this.scrollTo();
+  },
+
+  componentWillReceiveProps () {
+    this.scrollTo();
+  },
+
+  scrollTo () {
+    let params = this.getParams() || {}
+    if(params.splat) {
+      scrollTo(params.splat)
+    }
+  },
 
   getInitialState () {
     return {
