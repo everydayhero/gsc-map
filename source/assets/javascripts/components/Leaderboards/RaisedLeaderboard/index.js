@@ -32,11 +32,11 @@ export default React.createClass({
     let data = _.get(response, 'leaderboard.pages')
     let props = this.props
 
+    data = filterTeams(props.teamPageIds, data)
+
     data.forEach(function(item, index) {
       item.rank = index + 1
     })
-
-    data = filterTeams(props.teamPageIds, data)
 
     this.setState({
       data,
