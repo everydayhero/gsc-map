@@ -3,6 +3,8 @@
 import React       from 'react'
 import Leaderboard from '../Leaderboard'
 import getJSON from 'hui/lib/getJSON'
+import filterTeams from '../../../lib/filterTeams'
+
 import _ from 'lodash'
 
 export default React.createClass({
@@ -12,6 +14,7 @@ export default React.createClass({
     onSelect: React.PropTypes.func,
     url: React.PropTypes.string,
     inProgress: React.PropTypes.bool,
+    teamPageIds: React.PropTypes.array
   },
 
   getDefaultProps: function() {
@@ -27,9 +30,13 @@ export default React.createClass({
 
   onSuccess: function(response) {
     let data = _.get(response, 'leaderboard.pages')
+    let props = this.props
+
     data.forEach(function(item, index) {
       item.rank = index + 1
     })
+
+    data = filterTeams(props.teamPageIds, data)
 
     this.setState({
       data,

@@ -22,7 +22,8 @@ export default React.createClass({
   getDefaultProps: function() {
     return {
       campaignId: 'au-6839',
-      domain: 'everydayhero-staging.com'
+      domain: 'everydayhero-staging.com',
+      teamPageIds: [],
     }
   },
 
@@ -41,6 +42,7 @@ export default React.createClass({
         content: <RaisedLeaderboard
           key="raised"
           url={ apiRoutes.get('raised', props) }
+          teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       },
@@ -49,6 +51,7 @@ export default React.createClass({
         content: <DistanceLeaderboard
           key="distance"
           url={ apiRoutes.get('distance', props) }
+          teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       },
@@ -57,6 +60,7 @@ export default React.createClass({
         content: <ElevationLeaderboard
           key="elevation"
           url={ apiRoutes.get('elevation', props) }
+          teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }
           onDeSelect={ props.onDeSelect }/>
       }

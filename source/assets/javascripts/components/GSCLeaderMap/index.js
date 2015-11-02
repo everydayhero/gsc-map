@@ -5,6 +5,7 @@ import RaceMap from '../RaceMap'
 import routeString from '../../../data/route.js'
 import apiRoutes from '../../lib/apiRoutes'
 import getJSON from 'hui/lib/getJSON'
+import filterTeams from '../../lib/filterTeams'
 import 'es6-shim'
 
 const routeData = JSON.parse(routeString)
@@ -42,14 +43,16 @@ export default React.createClass({
   },
 
   onSuccess (response) {
-    this.setState({
-      inProgress: false,
-      teams: response.results.map((result) => {
+    let teams =  response.results.map((result) => {
         let team = merge({}, result, result.team)
         team.id = team.team_page_id
 
         return team
       })
+
+    this.setState({
+      inProgress: false,
+      teams: filterTeams(this.props.teamPageIds, teams)
     })
   },
 
