@@ -20,6 +20,16 @@ let waypointIcon = L.divIcon({
   html: '<div class="gsc-Marker gsc-Marker--waypoint" />'
 })
 
+let startIcon = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--start" />'
+})
+
+let finishIcon = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--finish" />'
+})
+
 const NullRouteDatum = {
   totalDistance: 0,
   bearing: 0,
@@ -243,11 +253,15 @@ export default React.createClass({
     let routePoints = this.props.route.map((routeDatum) => {
       return routeDatum.point
     })
+    let startMarker = L.marker(routePoints[0], { icon: startIcon })
+    let finishMarker = L.marker(routePoints [routePoints .length - 1], { icon: finishIcon })
     L.polyline(routePoints, {
       color: '#4c80a5',
       opacity: 1,
       weight: 5
     }).addTo(this.state.map)
+    startMarker.addTo(this.state.map)
+    finishMarker.addTo(this.state.map)
   },
 
   clearRenderedRacers () {
