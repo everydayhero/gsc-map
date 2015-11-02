@@ -55,6 +55,8 @@
     "ecmaFeatures": {
       "arrowFunctions": true,
       "blockBindings": true,
+      "defaultParams": true,
+      "experimentalObjectRestSpread": true,
       "destructuring": true,
       "jsx": true,
       "modules": true,

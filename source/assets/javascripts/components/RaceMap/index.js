@@ -20,6 +20,16 @@ let waypointIcon = L.divIcon({
   html: '<div class="gsc-Marker gsc-Marker--waypoint" />'
 })
 
+let startIcon = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--start" />'
+})
+
+let finishIcon = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--finish" />'
+})
+
 const NullRouteDatum = {
   totalDistance: 0,
   bearing: 0,
@@ -91,7 +101,8 @@ export default React.createClass({
     this.setState({
       map,
       waypoints,
-      markers
+      markers,
+      racers: []
     }, () => {
       L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -145,7 +156,7 @@ export default React.createClass({
   },
 
   setFocus (focus) {
-    let { map } = this.state
+    let { map, waypoints } = this.state
     map.invalidateSize()
     let selectedRacer = this.getSelectedRacer()
 
@@ -153,6 +164,9 @@ export default React.createClass({
       this.showRacer(selectedRacer, focus)
     } else {
       !!selectedRacer && selectedRacer.marker.closePopup()
+      waypoints.eachLayer((layer) => {
+        layer.closePopup()
+      })
       this.fitToRacers()
     }
   },
@@ -239,11 +253,15 @@ export default React.createClass({
     let routePoints = this.props.route.map((routeDatum) => {
       return routeDatum.point
     })
+    let startMarker = L.marker(routePoints[0], { icon: startIcon })
+    let finishMarker = L.marker(routePoints [routePoints .length - 1], { icon: finishIcon })
     L.polyline(routePoints, {
       color: '#4c80a5',
       opacity: 1,
       weight: 5
     }).addTo(this.state.map)
+    startMarker.addTo(this.state.map)
+    finishMarker.addTo(this.state.map)
   },
 
   clearRenderedRacers () {
@@ -252,7 +270,7 @@ export default React.createClass({
 
   renderRacers (racers) {
     this.setState({
-      racers: racers.map((racer) => {
+      racers: (racers || []).map((racer) => {
         let point = this.calcRacerPosition(racer.distance_in_meters)
         let popup = this.renderRacerPopup(racer)
         let marker = L.marker(point, { icon: racerIcon })

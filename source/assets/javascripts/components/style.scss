@@ -35,13 +35,21 @@
     right: 0;
     top: 0;
     bottom: 0;
-    width: initial;
+    width: 100%;
   }
   .mapWrap {
+    height: 300px;
     height: 40vh;
   }
   .mapWrap--active {
-    height: 60vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
   }
   .panelWrap {
     height: auto;
@@ -72,6 +80,23 @@
   margin-bottom: 10px;
   float: left;
   width: 100%;
+}
+
+.panel_instructions {
+  font-family: $font-copy;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  margin: 8px 8px 12px 8px;
+  font-style: italic;
+  line-height: 19px;
+
+  p {
+    margin: 4px 0;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0px;
+  }
 }
 
 .loadingIndicator {

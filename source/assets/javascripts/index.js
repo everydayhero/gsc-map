@@ -8,7 +8,7 @@ import Leaderboards from './components/Leaderboards'
 
 const campaignId = 'au-19283'
 const domain = 'everydayhero.com'
-const startAt = '2015-10-20T14:00:00Z'
+const startAt = '2015-10-31T14:00:00Z'
 
 const showMap = {
   individuals: {
@@ -89,11 +89,16 @@ let Example = React.createClass({
             startAt={ startAt }
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
-            selectedTeam={ this.state.selectedTeam } />
+            selectedTeam={ this.state.selectedTeam }
+            teamPageIds={ this.props.teamPageIds } />
         </div>
         <div className="panelWrap">
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
+            <div className="panel_instructions">
+              <p>As each team logs their rides, their marker will move along the course.</p>
+              <p>Select a team to view their progress.</p>
+            </div>
             <div className="tracker__select">
               <SelectInput
                 onChange={ this.handleShowChange }
@@ -112,7 +117,8 @@ let Example = React.createClass({
               groupBy={ groupBy }
               type={ type }
               campaignId={ campaignId }
-              startAt={ startAt } />
+              startAt={ startAt }
+              teamPageIds={ this.props.teamPageIds } />
           </div>
         </div>
       </div>
@@ -120,6 +126,6 @@ let Example = React.createClass({
   }
 })
 
-window.renderTracker = function(id) {
-  React.render(<Example />, document.getElementById(id))
+window.renderTracker = function(id, teamPageIds = []) {
+  React.render(<Example teamPageIds={ teamPageIds }/>, document.getElementById(id))
 }

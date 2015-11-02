@@ -2,10 +2,10 @@ import React from 'react'
 import classnames from 'classnames'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
-import waypoints from '../../../data/waypoints.json'
 import routeString from '../../../data/route.js'
 import apiRoutes from '../../lib/apiRoutes'
 import getJSON from 'hui/lib/getJSON'
+import filterTeams from '../../lib/filterTeams'
 import 'es6-shim'
 
 const routeData = JSON.parse(routeString)
@@ -45,14 +45,16 @@ export default React.createClass({
   },
 
   onSuccess (response) {
-    this.setState({
-      inProgress: false,
-      teams: response.results.map((result) => {
+    let teams =  response.results.map((result) => {
         let team = merge({}, result, result.team)
         team.id = team.team_page_id
 
         return team
       })
+
+    this.setState({
+      inProgress: false,
+      teams: filterTeams(this.props.teamPageIds, teams)
     })
   },
 
@@ -101,7 +103,6 @@ export default React.createClass({
             <RaceMap
               hasFocus={ state.hideOverlay }
               route={ routeData }
-              waypoints={ waypoints }
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />

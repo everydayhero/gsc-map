@@ -47,6 +47,12 @@
 .gsc-Marker--waypoint {
   background-image: url('../images/waypoint-pin.png');
 }
+.gsc-Marker--start {
+  background-image: url('../images/flag-start.png');
+}
+.gsc-Marker--finish {
+  background-image: url('../images/flag-finish.png');
+}
 
 .gsc-MarkerContainer--selected .gsc-Marker--racer {
   background-image: url('../images/pin-selected.png');
