@@ -39,7 +39,6 @@ export default React.createClass({
     let data = response.results.map((result, index) => {
       let team = merge({}, result, result.team)
       team.id = team.team_page_id
-      team.rank = index + 1
       team.distance_in_kms = team.distance_in_meters / 1000
 
       return team
@@ -48,6 +47,10 @@ export default React.createClass({
     data = data || []
 
     data = filterTeams(this.props.teamPageIds, data)
+
+    data.forEach(function(item, index) {
+      item.rank = index + 1
+    })
 
     this.setState({
       data,
