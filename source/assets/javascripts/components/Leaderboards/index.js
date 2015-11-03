@@ -6,7 +6,6 @@ import RaisedLeaderboard from './RaisedLeaderboard'
 import DistanceLeaderboard from './DistanceLeaderboard'
 import ElevationLeaderboard from './ElevationLeaderboard'
 import apiRoutes from '../../lib/apiRoutes'
-import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'Leaderboards',
