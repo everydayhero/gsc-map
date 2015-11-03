@@ -6,6 +6,7 @@ import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
+import _ from 'lodash'
 
 let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
@@ -16,6 +17,7 @@ export default React.createClass({
 
   componentDidMount () {
     this.scrollTo();
+    this.scrollToMap();
   },
 
   componentWillReceiveProps () {
@@ -26,6 +28,12 @@ export default React.createClass({
     let params = this.getParams() || {}
     if(params.splat) {
       scrollTo(params.splat)
+    }
+  },
+
+  scrollToMap () {
+    if(_.includes(this.getPathname(), 'tracker')) {
+      scrollTo('tracker')
     }
   },
 
@@ -78,7 +86,7 @@ export default React.createClass({
     })
 
     return (
-      <div className="tracker">
+      <div className="tracker" id="tracker">
         <div className={ mapWrapClasses }>
           <GSCLeaderMap
             domain={ domain }
