@@ -64,6 +64,12 @@ export default React.createClass({
     })
   },
 
+  handleFilterChange (e) {
+    this.setState({
+      filterQuery: e.target.value
+    })
+  },
+
   render () {
     let { mapActive } = this.state
     let mapWrapClasses = classnames({
@@ -90,7 +96,15 @@ export default React.createClass({
               <p>As each team logs their rides, their marker will move along the course.</p>
               <p>Select a team to view their progress.</p>
             </div>
+            <div className="tracker__filter">
+              <input
+                className="tracker__filter-input"
+                type="search"
+                onChange={ this.handleFilterChange }
+                placeholder="Search for a team name" />
+            </div>
             <Leaderboards
+              filterQuery={ this.state.filterQuery }
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
