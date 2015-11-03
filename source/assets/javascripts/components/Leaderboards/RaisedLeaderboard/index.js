@@ -4,11 +4,13 @@ import React       from 'react'
 import Leaderboard from '../Leaderboard'
 import getJSON from 'hui/lib/getJSON'
 import filterTeams from '../../../lib/filterTeams'
-
+import filterable from '../../../mixins/filterable'
 import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'RaisedLeaderboard',
+
+  mixins: [filterable],
 
   propTypes: {
     onSelect: React.PropTypes.func,
@@ -32,16 +34,18 @@ export default React.createClass({
     let data = _.get(response, 'leaderboard.pages')
     let props = this.props
 
-    data = filterTeams(props.teamPageIds, data)
-
-    data.forEach(function(item, index) {
+    data = filterTeams(this.props.teamPageIds, data)
+    data = data.map(function(item, index) {
       item.rank = index + 1
+      return item
     })
+    let filteredData = this.filterByQuery(this.props.filterQuery, data, ['name'])
 
     this.setState({
       data,
+      filteredData,
       inProgress: false,
-      count: Math.ceil(data.length / 10)
+      count: Math.ceil(filteredData.length / 10)
     })
   },
 
@@ -55,7 +59,10 @@ export default React.createClass({
   render: function() {
     return (
       <div className="RaisedLeaderboard">
-        <Leaderboard { ...this.props } { ...this.state } />
+        <Leaderboard
+          { ...this.props }
+          { ...this.state }
+          data={ this.state.filteredData } />
       </div>
     )
   }

@@ -15,7 +15,8 @@ export default React.createClass({
     return {
       active: 0,
       currentPage: 0,
-      count: 3
+      count: 3,
+      filterQuery: ''
     }
   },
 
@@ -41,6 +42,7 @@ export default React.createClass({
         label: 'Raised',
         content: <RaisedLeaderboard
           key="raised"
+          filterQuery={ this.props.filterQuery }
           url={ apiRoutes.get('raised', props) }
           teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }
@@ -50,6 +52,7 @@ export default React.createClass({
         label: 'Distance',
         content: <DistanceLeaderboard
           key="distance"
+          filterQuery={ this.props.filterQuery }
           url={ apiRoutes.get('distance', props) }
           teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }
@@ -59,6 +62,7 @@ export default React.createClass({
         label: 'Elevation',
         content: <ElevationLeaderboard
           key="elevation"
+          filterQuery={ this.props.filterQuery }
           url={ apiRoutes.get('elevation', props) }
           teamPageIds={ props.teamPageIds }
           onSelect={ props.onSelect }

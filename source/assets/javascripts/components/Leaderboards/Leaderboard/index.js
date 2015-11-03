@@ -49,7 +49,7 @@ export default React.createClass({
     let pageId = page.id
     let onSelect = this.props.onSelect
 
-    if(page.owner_type === 'user') {
+    if (page.owner_type === 'user') {
       pageId = page.team_page_id;
     }
 
@@ -60,7 +60,7 @@ export default React.createClass({
     let state = this.state
     let props = this.props
 
-    if(props.data.length === 0) {
+    if (!props.data.length) {
       return <EmptyState/>
     }
 

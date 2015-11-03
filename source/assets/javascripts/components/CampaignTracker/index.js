@@ -6,6 +6,7 @@ import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
+import Filter from 'hui/forms/Filter'
 
 let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
@@ -64,6 +65,12 @@ export default React.createClass({
     })
   },
 
+  handleFilterChange (e) {
+    this.setState({
+      filterQuery: e.target.value
+    })
+  },
+
   render () {
     let { mapActive } = this.state
     let mapWrapClasses = classnames({
@@ -90,7 +97,14 @@ export default React.createClass({
               <p>As each team logs their rides, their marker will move along the course.</p>
               <p>Select a team to view their progress.</p>
             </div>
+            <div className="tracker__filter">
+              <input
+                type="search"
+                onChange={ this.handleFilterChange }
+                placeholder="Search for a team" />
+            </div>
             <Leaderboards
+              filterQuery={ this.state.filterQuery }
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
