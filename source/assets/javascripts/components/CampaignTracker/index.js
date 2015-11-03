@@ -99,9 +99,10 @@ export default React.createClass({
             </div>
             <div className="tracker__filter">
               <input
+                className="tracker__filter-input"
                 type="search"
                 onChange={ this.handleFilterChange }
-                placeholder="Search for a team" />
+                placeholder="Search for a team name" />
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }

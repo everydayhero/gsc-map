@@ -9,12 +9,12 @@ export default React.createClass({
   render: function() {
     return (
       <div key="distance" className="Leaderboards__underConstruction">
-        <h2 className="underConstruction__header">
-          Official ride commences Nov 1st 2015
-        </h2>
-        <div className="underConstruction__cta">
-          <Button kind="cta" href="https://greatsoutherncrossing.everydayhero.com/au/get-started">Register for free</Button>
-        </div>
+        <p className="underConstruction__header">
+          <em>
+            Sorry, no teams match your search. <br />
+            Please, try another search term.
+          </em>
+        </p>
       </div>
     )
   }
