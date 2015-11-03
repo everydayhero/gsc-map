@@ -5,6 +5,7 @@ import 'classlist-polyfill'
 import find from 'lodash/collection/find'
 import RacerPopup from './RacerPopup'
 import WaypointPopup from './WaypointPopup'
+import Router from 'react-router'
 
 const earthsRadiusInMeters = 6371000
 const toRad = (value) => value * Math.PI / 180
@@ -37,6 +38,8 @@ const NullRouteDatum = {
 }
 
 export default React.createClass({
+  mixins: [Router.State, Router.Navigation],
+
   propTypes: {
     hasFocus: React.PropTypes.bool,
     racers: React.PropTypes.array,

@@ -49,7 +49,7 @@ export default React.createClass({
   onSuccess: function(response) {
     let data = response.results.map((result, index) => {
       let entity = merge({}, result, result.team, result.page)
-      entity.id = entity.id || entity.team_page_id
+      entity.id = entity.team_page_id
       entity.rank = index + 1
       entity.distance_in_kms = entity.distance_in_meters / 1000
 

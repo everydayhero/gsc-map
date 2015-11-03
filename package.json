@@ -40,6 +40,8 @@
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^3.10.1",
     "react": "^0.12.2",
+    "react-router": "^0.11.5",
+    "scroll": "^1.0.0",
     "whatwg-fetch": "^0.10.0"
   },
   "browserify": {
