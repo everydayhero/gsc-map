@@ -6,7 +6,6 @@ import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
-import Filter from 'hui/forms/Filter'
 
 let campaignId = 'au-19283'
 let domain = 'everydayhero.com'
