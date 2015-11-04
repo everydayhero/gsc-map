@@ -2,7 +2,18 @@
 
 import scroll from 'scroll';
 
-export default function(id) {
+let scrollTo = function(id) {
+  // wait for document interactive so the browsers doesn't try to scroll to it's own default
+  if (document.readyState !== 'interactive') {
+    document.onreadystatechange = function () {
+      if (document.readyState == "interactive") {
+        scrollTo(id);
+      }
+    }
+
+    return
+  }
+
   let node = window.document.getElementById(id);
   // need to get the body and the html nodes to make sure firefox is happy. ᕙ(⇀‸↼‶)ᕗ
   let scrollElement = [document.getElementsByTagName('html')[0], document.getElementsByTagName('body')[0]];
@@ -13,3 +24,5 @@ export default function(id) {
     }
   }
 }
+
+export default scrollTo

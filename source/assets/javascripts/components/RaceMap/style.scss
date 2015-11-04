@@ -53,10 +53,14 @@
 .gsc-Marker--finish {
   background-image: url('../images/flag-finish.png');
 }
-
-.gsc-MarkerContainer--selected .gsc-Marker--racer {
+.gsc-Marker--racer-selected {
   background-image: url('../images/pin-selected.png');
 }
+.leaflet-popup.leaflet-zoom-animated {
+  bottom: 32px !important;
+}
+
+
 
 .leaflet-div-icon {
   background-color: transparent;

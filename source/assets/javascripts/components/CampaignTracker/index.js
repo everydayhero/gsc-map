@@ -7,10 +7,11 @@ import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
 import SelectInput from 'hui/forms/SelectInput'
+import _ from 'lodash'
 
-const campaignId = 'au-19283'
-const domain = 'everydayhero.com'
-const startAt = '2015-10-31T14:00:00Z'
+const campaignId = 'au-6839'
+const domain = 'everydayhero-staging.com'
+const startAt = '2015-09-30T14:00:00Z'
 
 const showMap = {
   individuals: {
@@ -27,7 +28,8 @@ export default React.createClass({
   mixins: [Router.State, Router.Navigation],
 
   componentDidMount () {
-    this.scrollTo()
+    this.scrollTo();
+    this.scrollToMap();
   },
 
   componentWillReceiveProps () {
@@ -38,6 +40,12 @@ export default React.createClass({
     let params = this.getParams() || {}
     if(params.splat) {
       scrollTo(params.splat)
+    }
+  },
+
+  scrollToMap () {
+    if(_.includes(this.getPathname(), 'tracker')) {
+      scrollTo('tracker')
     }
   },
 
@@ -59,6 +67,7 @@ export default React.createClass({
   },
 
   onSelect (id) {
+    id = id || ''
     let component = this
     id = id.toString()
     // Don't change id unless user really intended to
@@ -78,7 +87,8 @@ export default React.createClass({
     })
   },
 
-  handleShowChange (show) {
+  handleShowChange (e) {
+    let show = e.target.value
     let showState = showMap[show]
 
     !!showState && this.setState({
@@ -91,6 +101,12 @@ export default React.createClass({
     })
   },
 
+  handleFilterChange (e) {
+    this.setState({
+      filterQuery: e.target.value
+    })
+  },
+
   render () {
     let { mapActive, show, groupBy, type } = this.state
     let mapWrapClasses = classnames({
@@ -99,7 +115,7 @@ export default React.createClass({
     })
 
     return (
-      <div className="tracker">
+      <div className="tracker" id="tracker">
         <div className={ mapWrapClasses }>
           <GSCLeaderMap
             domain={ domain }
@@ -118,17 +134,20 @@ export default React.createClass({
               <p>Select a team to view their progress.</p>
             </div>
             <div className="tracker__select">
-              <SelectInput
-                onChange={ this.handleShowChange }
-                spacing="compact"
-                label="Show"
-                value={ show }
-                options={[
-                  { value: 'teams', label: 'Teams' },
-                  { value: 'individuals', label: 'Individuals' }
-                ]} />
+              <select onChange={ this.handleShowChange }>
+                <option value="teams">Teams</option>
+                <option value="individuals">Individuals</option>
+              </select>
+            </div>
+            <div className="tracker__filter">
+              <input
+                className="tracker__filter-input"
+                type="search"
+                onChange={ this.handleFilterChange }
+                placeholder="Search for a team name" />
             </div>
             <Leaderboards
+              filterQuery={ this.state.filterQuery }
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
