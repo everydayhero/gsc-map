@@ -142,7 +142,7 @@ export default React.createClass({
               <div className="gsc-grid-item gsc-grid-item--one-half">
                 <div className="tracker__select">
                   <select
-                    value="teams"
+                    value={ this.state.show }
                     className="tracker__select-input"
                     onChange={ this.handleShowChange }>
 
