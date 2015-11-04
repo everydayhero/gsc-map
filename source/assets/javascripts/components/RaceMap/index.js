@@ -16,6 +16,11 @@ let racerIcon = L.divIcon({
   html: '<div class="gsc-Marker gsc-Marker--racer" />'
 })
 
+let racerIconSelected = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--racer-selected" />'
+})
+
 let waypointIcon = L.divIcon({
   iconSize: new L.Point(36, 36),
   html: '<div class="gsc-Marker gsc-Marker--waypoint" />'
@@ -45,6 +50,7 @@ export default React.createClass({
     racers: React.PropTypes.array,
     route: React.PropTypes.array.isRequired,
     waypoints: React.PropTypes.array,
+    selectedRacer: React.PropTypes.string,
     onRacerSelection: React.PropTypes.func
   },
 
@@ -54,7 +60,14 @@ export default React.createClass({
       racers: [],
       route: [],
       waypoints: [],
+      selectedRacer: '',
       onRacerSelection: () => {}
+    }
+  },
+
+  getInitialState () {
+    return {
+      selectedRacer: this.props.selectedRacer,
     }
   },
 
@@ -63,8 +76,8 @@ export default React.createClass({
     let popup = marker.getPopup()
     let px = map.project(popup._latlng)
     px.y -= popup._container.clientHeight / 2
-    marker._icon.classList.add('gsc-MarkerContainer--selected')
     map.panTo(map.unproject(px))
+    marker.setIcon(racerIconSelected)
     this.setState({
       selectedRacer: marker.racer_id
     }, () => {
@@ -81,8 +94,7 @@ export default React.createClass({
   },
 
   closeRacerPopup (marker) {
-    let icon = marker._icon
-    !!icon && icon.classList.remove('gsc-MarkerContainer--selected')
+    marker.setIcon(racerIcon)
   },
 
   handlePopupClose (e) {
@@ -166,7 +178,10 @@ export default React.createClass({
     if (focus === true) {
       this.showRacer(selectedRacer, focus)
     } else {
-      !!selectedRacer && selectedRacer.marker.closePopup()
+      if (selectedRacer) {
+        selectedRacer.marker.closePopup()
+        selectedRacer.marker.setIcon(racerIconSelected)
+      }
       waypoints.eachLayer((layer) => {
         layer.closePopup()
       })
@@ -214,12 +229,12 @@ export default React.createClass({
     if (focus) {
       marker.openPopup()
     } else {
-      marker._icon.classList.add('gsc-MarkerContainer--selected')
+      marker.setIcon(racerIconSelected)
     }
   },
 
   hideRacer (racer, focus) {
-    if (!(racer && racer.marker && racer.marker._icon)) return
+    if (!(racer && racer.marker)) return
 
     let marker = racer.marker
     marker.setZIndexOffset(0)
@@ -227,7 +242,7 @@ export default React.createClass({
     if (focus) {
       marker.closePopup()
     } else {
-      marker._icon.classList.remove('gsc-MarkerContainer--selected')
+      marker.setIcon(racerIcon)
     }
   },
 
@@ -246,6 +261,7 @@ export default React.createClass({
   racersUpdated () {
     let selectedRacer = this.getSelectedRacer()
     if (selectedRacer) {
+      this.fitToRacers()
       this.selectRacer(selectedRacer.id)
     } else {
       this.fitToRacers()
