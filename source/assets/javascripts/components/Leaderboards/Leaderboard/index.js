@@ -31,6 +31,14 @@ export default React.createClass({
     }
   },
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.filterQuery !== this.props.filterQuery) {
+      this.setState({
+        currentPage: 0
+      })
+    }
+  },
+
   onPage: function(increment) {
     let currentPage = this.state.currentPage + increment
     this.setState({ currentPage })
