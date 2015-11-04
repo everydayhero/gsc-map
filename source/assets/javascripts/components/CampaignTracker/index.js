@@ -54,7 +54,8 @@ export default React.createClass({
       mapActive: false,
       groupBy: 'teams',
       type: 'team',
-      show: 'teams'
+      show: 'teams',
+      filterPrompt: 'Search for a team'
     }
   },
 
@@ -90,10 +91,14 @@ export default React.createClass({
   handleShowChange (e) {
     let show = e.target.value
     let showState = showMap[show]
+    let filterPrompt = show === 'teams' ?
+                        'Search for a team' :
+                        'Search for an individual'
 
     !!showState && this.setState({
       ...showState,
-      show
+      show,
+      filterPrompt
     }, () => {
       if (show === 'individuals') {
         this.transitionTo('tracker')
@@ -133,18 +138,26 @@ export default React.createClass({
               <p>As each team logs their rides, their marker will move along the course.</p>
               <p>Select a team to view their progress.</p>
             </div>
-            <div className="tracker__select">
-              <select onChange={ this.handleShowChange }>
-                <option value="teams">Teams</option>
-                <option value="individuals">Individuals</option>
-              </select>
-            </div>
-            <div className="tracker__filter">
-              <input
-                className="tracker__filter-input"
-                type="search"
-                onChange={ this.handleFilterChange }
-                placeholder="Search for a team name" />
+            <div className="gsc-grid-container">
+              <div className="gsc-grid-item gsc-grid-item--one-half">
+                <div className="tracker__select">
+                  <select
+                    value="teams"
+                    className="tracker__select-input"
+                    onChange={ this.handleShowChange }>
+
+                    <option value="teams">Teams</option>
+                    <option value="individuals">Individuals</option>
+                  </select>
+                </div>
+              </div>
+              <div className="tracker__filter gsc-grid-item gsc-grid-item--one-half">
+                <input
+                  className="tracker__filter-input"
+                  type="search"
+                  onChange={ this.handleFilterChange }
+                  placeholder={ this.state.filterPrompt } />
+              </div>
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }
