@@ -19,8 +19,10 @@ export default {
 
   componentWillReceiveProps (newProps) {
     if (newProps.filterQuery !== this.props.filterQuery) {
+      let filteredData = this.filterByQuery(newProps.filterQuery, this.state.data, ['name'])
       this.setState({
-        filteredData: this.filterByQuery(newProps.filterQuery, this.state.data, ['name'])
+        filteredData,
+        count: Math.ceil(filteredData.length / 10)
       })
     }
   },
