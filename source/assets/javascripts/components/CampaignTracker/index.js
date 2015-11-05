@@ -119,7 +119,7 @@ export default React.createClass({
     })
 
     return (
-      <div className="tracker" id="tracker">
+      <div className="tracker">
         <div className={ mapWrapClasses }>
           <GSCLeaderMap
             domain={ domain }
