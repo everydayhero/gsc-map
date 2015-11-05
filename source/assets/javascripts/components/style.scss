@@ -2,6 +2,10 @@
   position: relative;
   height: 800px;
   height: 80vh;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .mapWrap {
@@ -66,9 +70,65 @@
   font-family: $font-copy;
   text-align: center;
   margin: 0px;
+  margin-bottom: 10px;
   font-weight: 300;
   text-transform: uppercase;
   color: white;
+}
+
+.gsc-grid-container {
+  margin-left: -0.25em;
+  margin-right: -0.25em;
+  &:before, &:after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+}
+
+.gsc-grid-item {
+  float: left;
+  width: 100%;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+
+.gsc-grid-item--one-half {
+  width: 50%;
+}
+
+.tracker__select {
+  font-family: $font-copy;
+  position: relative;
+  color: $grey;
+
+  &:after {
+    content: '\25BE';
+    width: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    position: absolute;
+    right: 0.25em;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    background-color: white;
+  }
+}
+
+.tracker__select-input {
+  appearance: none;
+  border:none;
+  background-color: white;
+  border-radius: 2px;
+  padding: 0.25em 0.333em;
+  line-height: 1.5em;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 0;
+  width: 100%;
+  color: inherit;
+  outline: none;
 }
 
 .panel_instructions {
@@ -98,14 +158,22 @@
   border: none;
   font-family: inherit;
   line-height: 1.5em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
+  padding: 0.25em 0.333em;
   font-size: inherit;
   border-radius: 2px;
   display: block;
   width: 100%;
-  margin-bottom: 12px;
+  margin: 0;
   outline: none;
+}
+
+.tracker__filter-input::-webkit-search-cancel-button{
+  position: relative;
+  right: 0.5em;
+}
+
+.tracker__filter-input::-webkit-search-decoration {
+  appearance: none;
 }
 
 .tracker__filter-input::-webkit-input-placeholder {

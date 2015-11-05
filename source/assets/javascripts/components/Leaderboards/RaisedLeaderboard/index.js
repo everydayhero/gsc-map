@@ -27,7 +27,19 @@ export default React.createClass({
 
   componentDidMount: function() {
     let props = this.props
-    getJSON(props.url, props.params).then(this.onSuccess, this.onFail)
+    getJSON(props.url, props.params)
+      .then(this.onSuccess, this.onFail)
+  },
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.url === this.props.url) return
+
+    this.setState({
+      inProgress: true
+    }, () => {
+      getJSON(nextProps.url, this.props.params)
+        .then(this.onSuccess, this.onFail)
+    })
   },
 
   onSuccess: function(response) {

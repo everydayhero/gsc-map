@@ -11,7 +11,7 @@ export default React.createClass({
       <div key="distance" className="Leaderboards__underConstruction">
         <p className="underConstruction__header">
           <em>
-            Sorry, no teams match your search. <br />
+            Sorry, no results match your search. <br />
             Please, try another search term.
           </em>
         </p>

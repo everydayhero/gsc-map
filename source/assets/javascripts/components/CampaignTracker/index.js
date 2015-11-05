@@ -6,11 +6,23 @@ import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
+import SelectInput from 'hui/forms/SelectInput'
 import _ from 'lodash'
 
-let campaignId = 'au-19283'
-let domain = 'everydayhero.com'
-let startAt = '2015-10-31T14:00:00Z'
+const campaignId = 'au-19283'
+const domain = 'everydayhero.com'
+const startAt = '2015-10-31T14:00:00Z'
+
+const showMap = {
+  individuals: {
+    groupBy: 'pages',
+    type: 'individual'
+  },
+  teams: {
+    groupBy: 'teams',
+    type: 'team'
+  }
+}
 
 export default React.createClass({
   mixins: [Router.State, Router.Navigation],
@@ -21,7 +33,7 @@ export default React.createClass({
   },
 
   componentWillReceiveProps () {
-    this.scrollTo();
+    this.scrollTo()
   },
 
   scrollTo () {
@@ -39,13 +51,16 @@ export default React.createClass({
 
   getInitialState () {
     return {
-      mapActive: false
+      mapActive: false,
+      groupBy: 'teams',
+      type: 'team',
+      show: 'teams',
+      filterPrompt: 'Search for a team'
     }
   },
 
-  handleTeamSelection (id) {
-    id = id || ''
-    this.transitionTo('team', { teamId: id } );
+  handleTeamSelection (id = '') {
+    this.transitionTo('team', { teamId: id } )
   },
 
   handleChange (e) {
@@ -53,12 +68,13 @@ export default React.createClass({
   },
 
   onSelect (id) {
+    id = id || ''
     let component = this
     id = id.toString()
     // Don't change id unless user really intended to
     clearTimeout(this.waitOut)
     this.waitOut = setTimeout(function() {
-      component.transitionTo('team', {teamId: id} );
+      component.transitionTo('team', {teamId: id} )
     }, 300)
   },
 
@@ -72,6 +88,24 @@ export default React.createClass({
     })
   },
 
+  handleShowChange (e) {
+    let show = e.target.value
+    let showState = showMap[show]
+    let filterPrompt = show === 'teams' ?
+                        'Search for a team' :
+                        'Search for an individual'
+
+    !!showState && this.setState({
+      ...showState,
+      show,
+      filterPrompt
+    }, () => {
+      if (show === 'individuals') {
+        this.transitionTo('tracker')
+      }
+    })
+  },
+
   handleFilterChange (e) {
     this.setState({
       filterQuery: e.target.value
@@ -79,7 +113,7 @@ export default React.createClass({
   },
 
   render () {
-    let { mapActive } = this.state
+    let { mapActive, show, groupBy, type } = this.state
     let mapWrapClasses = classnames({
       'mapWrap': true,
       'mapWrap--active': !!mapActive
@@ -104,18 +138,34 @@ export default React.createClass({
               <p>As each team logs their rides, their marker will move along the course.</p>
               <p>Select a team to view their progress.</p>
             </div>
-            <div className="tracker__filter">
-              <input
-                className="tracker__filter-input"
-                type="search"
-                onChange={ this.handleFilterChange }
-                placeholder="Search for a team name" />
+            <div className="gsc-grid-container">
+              <div className="gsc-grid-item gsc-grid-item--one-half">
+                <div className="tracker__select">
+                  <select
+                    value={ this.state.show }
+                    className="tracker__select-input"
+                    onChange={ this.handleShowChange }>
+
+                    <option value="teams">Teams</option>
+                    <option value="individuals">Individuals</option>
+                  </select>
+                </div>
+              </div>
+              <div className="tracker__filter gsc-grid-item gsc-grid-item--one-half">
+                <input
+                  className="tracker__filter-input"
+                  type="search"
+                  onChange={ this.handleFilterChange }
+                  placeholder={ this.state.filterPrompt } />
+              </div>
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }
               onSelect={ this.onSelect }
               onDeSelect={ this.onDeSelect }
               domain={ domain }
+              groupBy={ groupBy }
+              type={ type }
               campaignId={ campaignId }
               startAt={ startAt }
               teamPageIds={ this.props.teamPageIds } />

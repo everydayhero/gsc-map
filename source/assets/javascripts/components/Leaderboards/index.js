@@ -6,7 +6,6 @@ import RaisedLeaderboard from './RaisedLeaderboard'
 import DistanceLeaderboard from './DistanceLeaderboard'
 import ElevationLeaderboard from './ElevationLeaderboard'
 import apiRoutes from '../../lib/apiRoutes'
-import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'Leaderboards',
@@ -22,6 +21,8 @@ export default React.createClass({
 
   getDefaultProps: function() {
     return {
+      groupBy: 'teams',
+      type: 'team',
       campaignId: 'au-6839',
       domain: 'everydayhero-staging.com',
       teamPageIds: [],
