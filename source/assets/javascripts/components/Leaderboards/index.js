@@ -29,10 +29,6 @@ export default React.createClass({
     }
   },
 
-  getApiRoute (key, params) {
-    return apiRoutes.get(key, params)
-  },
-
   handleChange: function(active) {
     this.setState({
       active
