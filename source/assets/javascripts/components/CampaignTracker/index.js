@@ -6,7 +6,6 @@ import GSCLeaderMap from '../GSCLeaderMap'
 import Leaderboards from '../Leaderboards'
 import Router from 'react-router'
 import scrollTo from '../../lib/scrollTo'
-import SelectInput from 'hui/forms/SelectInput'
 import _ from 'lodash'
 
 const campaignId = 'au-19283'
