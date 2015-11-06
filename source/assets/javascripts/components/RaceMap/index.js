@@ -7,6 +7,7 @@ import RacerPopup from './RacerPopup'
 import WaypointPopup from './WaypointPopup'
 import Router from 'react-router'
 import openPopup from 'hui/lib/openPopup'
+import teamShareUrl from '../../lib/teamShareUrl'
 
 const earthsRadiusInMeters = 6371000
 const toRad = (value) => value * Math.PI / 180
@@ -317,9 +318,8 @@ export default React.createClass({
   },
 
   handleShareClick (container) {
-    let { protocol, host } = location
     let teamId = container.getAttribute('data-team-id')
-    let url = encodeURIComponent(`${ protocol }//${ host }/#/tracker/team/${ teamId }`)
+    let url = encodeURIComponent(teamShareUrl(teamId))
 
     openPopup(`http://facebook.com/sharer/sharer.php/?u=${ url }`)
   },

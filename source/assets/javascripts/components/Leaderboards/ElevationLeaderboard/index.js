@@ -7,6 +7,7 @@ import merge from 'lodash/object/merge'
 import filterTeams from '../../../lib/filterTeams'
 import _ from 'lodash'
 import filterable from '../../../mixins/filterable'
+import teamShareUrl from '../../../lib/teamShareUrl'
 
 export default React.createClass({
   displayName: 'ElevationLeaderboard',
@@ -62,6 +63,9 @@ export default React.createClass({
     data = filterTeams(this.props.teamPageIds, data)
     data = data.map(function(item, index) {
       item.rank = index + 1
+      if (item.team_page_id) {
+        item.share_url = teamShareUrl(item.team_page_id)
+      }
       return item
     })
     let filteredData = this.filterByQuery(this.props.filterQuery, data, ['name'])

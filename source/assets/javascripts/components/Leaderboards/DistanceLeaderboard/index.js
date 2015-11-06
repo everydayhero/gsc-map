@@ -6,6 +6,7 @@ import getJSON from 'hui/lib/getJSON'
 import merge from 'lodash/object/merge'
 import filterTeams from '../../../lib/filterTeams'
 import filterable from '../../../mixins/filterable'
+import teamShareUrl from '../../../lib/teamShareUrl'
 import _ from 'lodash'
 
 export default React.createClass({
@@ -62,6 +63,9 @@ export default React.createClass({
     data = filterTeams(this.props.teamPageIds, data)
     data = data.map(function(item, index) {
       item.rank = index + 1
+      if (item.team_page_id) {
+        item.share_url = teamShareUrl(item.team_page_id)
+      }
       return item
     })
     let filteredData = this.filterByQuery(this.props.filterQuery, data, ['name'])
