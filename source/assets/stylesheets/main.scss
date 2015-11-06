@@ -5,6 +5,7 @@
 @import '../../../node_modules/hui/common.scss';
 $green-active: #4c80a5;
 $green: $green-active;
+$green-light: lighten($green-active, 10%);
 
 @import '../../../node_modules/hui/buttons/**/*.scss';
 @import '../../../node_modules/hui/leaderboard/**/*.scss';

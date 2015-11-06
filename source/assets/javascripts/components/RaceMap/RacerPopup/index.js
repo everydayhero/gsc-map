@@ -1,5 +1,6 @@
 import React from 'react'
 import HuiButton from 'hui/buttons/Button'
+import HuiShare from 'hui/buttons/Share'
 import numeric from 'hui/lib/numeric'
 
 export default React.createClass({
@@ -17,10 +18,10 @@ export default React.createClass({
 
   render () {
     let team = this.props.racer
+    let { protocol, host } = location
     return (
       <div
-        className="gsc-PopupContent"
-        onClick={ this.props.onClick }>
+        className="gsc-PopupContent">
 
         <header className="gsc-PopupContent__header">
           <div className="gsc-PopupContent__avatar">
@@ -61,12 +62,25 @@ export default React.createClass({
           </div>
         </div>
 
-        <HuiButton
-          href={ team.url }
-          className="gsc-PopupContent__call-to-action"
-          kind="primary">
-          Give
-        </HuiButton>
+        <div className="gsc-grid-container">
+          <div className="gsc-grid-item gsc-grid-item--one-half">
+            <HuiButton
+              className="gsc-Popup__cta"
+              icon="heart"
+              href={ team.url }
+              kind="cta">
+              Give
+            </HuiButton>
+          </div>
+          <div
+            className="gsc-grid-item gsc-grid-item--one-half gsc-Popup__share-container"
+            data-team-id={ team.id }>
+            <HuiShare
+              className="gsc-Popup__cta gsc-Popup__cta--share"
+              label="Share"
+              kind="facebook" />
+          </div>
+        </div>
       </div>
     )
   }

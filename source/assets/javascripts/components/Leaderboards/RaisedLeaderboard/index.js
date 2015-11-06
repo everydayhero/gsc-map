@@ -5,6 +5,7 @@ import Leaderboard from '../Leaderboard'
 import getJSON from 'hui/lib/getJSON'
 import filterTeams from '../../../lib/filterTeams'
 import filterable from '../../../mixins/filterable'
+import teamShareUrl from '../../../lib/teamShareUrl'
 import _ from 'lodash'
 
 export default React.createClass({
@@ -49,6 +50,11 @@ export default React.createClass({
     data = filterTeams(this.props.teamPageIds, data)
     data = data.map(function(item, index) {
       item.rank = index + 1
+      if (item.owner_type === 'Team') {
+        item.share_url = teamShareUrl(item.id)
+      } else {
+        item.id = item.team_page_id
+      }
       return item
     })
     let filteredData = this.filterByQuery(this.props.filterQuery, data, ['name'])
