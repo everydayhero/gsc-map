@@ -20,7 +20,7 @@
     "watch-styles": "nodemon -x 'npm run styles' -w source/assets -e scss",
     "images": "mkdir -p dist/$npm_package_version/assets/images/ && cp -R source/assets/images dist/$npm_package_version/assets",
     "watch-images": "nodemon -x 'npm run images' -w source/assets/images -e png,svg,jpg",
-    "index": "mkdir -p dist && cp source/index.html dist/$npm_package_version/index.html",
+    "index": "mkdir -p dist/$npm_package_version && cp source/index.html dist/$npm_package_version/index.html",
     "watch-index": "nodemon -x 'npm run index' -w source -e html",
     "build": "npm run data && npm run scripts-prod && npm run styles && npm run images",
     "watch": "npm run watch-data & npm run watch-scripts & npm run watch-styles & npm run watch-images & npm run watch-index",
