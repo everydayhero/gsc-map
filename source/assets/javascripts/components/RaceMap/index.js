@@ -6,6 +6,7 @@ import find from 'lodash/collection/find'
 import RacerPopup from './RacerPopup'
 import WaypointPopup from './WaypointPopup'
 import Router from 'react-router'
+import openPopup from 'hui/lib/openPopup'
 
 const earthsRadiusInMeters = 6371000
 const toRad = (value) => value * Math.PI / 180
@@ -318,15 +319,37 @@ export default React.createClass({
       })
   },
 
+  handleShareClick (container) {
+    let { protocol, host } = location
+    let teamId = container.getAttribute('data-team-id')
+    let url = encodeURIComponent(`${ protocol }//${ host }/#/tracker/team/${ teamId }`)
+
+    openPopup(`http://facebook.com/sharer/sharer.php/?u=${ url }`)
+  },
+
+  getShareButton (node) {
+    if (!node || !node.classList) return undefined
+    if (node.classList.contains('gsc-Popup__share-container')) return node
+
+    return this.getShareButton(node.parentNode)
+  },
+
+  handleMapClick (e) {
+    let shareButton = this.getShareButton(e.target)
+    if (shareButton) {
+      this.handleShareClick(shareButton)
+    }
+  },
+
   renderRacerPopup (racer) {
-    return React.renderToString(<RacerPopup racer={ racer } />)
+    return React.renderToStaticMarkup(<RacerPopup racer={ racer } />)
   },
 
   renderWaypointPopup (waypoint) {
-    return React.renderToString(<WaypointPopup waypoint={ waypoint } />)
+    return React.renderToStaticMarkup(<WaypointPopup waypoint={ waypoint } />)
   },
 
   render () {
-    return <div className="map gsc-MapContainer" />
+    return <div className="map gsc-MapContainer" onClick={ this.handleMapClick } />
   }
 })

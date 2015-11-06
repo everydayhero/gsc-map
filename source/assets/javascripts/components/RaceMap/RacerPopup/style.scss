@@ -85,13 +85,16 @@
   position: relative;
 }
 
-.gsc-PopupContent__call-to-action {
-  background-color: #4c80a5;
+.gsc-Popup__cta {
   margin: 0;
-  border: none;
   width: 100%;
+
+  &.hui-Button--facebook {
+    border: none;
+  }
 }
 
-a.gsc-PopupContent__call-to-action {
+a.gsc-Popup__cta {
+  line-height: 41px;
   color: white;
 }

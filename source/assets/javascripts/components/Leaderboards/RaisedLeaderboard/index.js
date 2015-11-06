@@ -45,10 +45,12 @@ export default React.createClass({
   onSuccess: function(response) {
     let data = _.get(response, 'leaderboard.pages')
     let props = this.props
+    let { protocol, host } = location
 
     data = filterTeams(this.props.teamPageIds, data)
     data = data.map(function(item, index) {
       item.rank = index + 1
+      item.share_url = `${ protocol }//${ host }/#/tracker/team/${item.team_page_id}`
       return item
     })
     let filteredData = this.filterByQuery(this.props.filterQuery, data, ['name'])
