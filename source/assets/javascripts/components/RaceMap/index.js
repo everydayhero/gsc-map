@@ -308,9 +308,6 @@ export default React.createClass({
 
   renderWaypoints () {
     this.props.waypoints
-      .filter((waypoint) => {
-        return !(waypoint.name === 'Brisbane' || waypoint.name === "Perth")
-      })
       .map((waypoint) => {
         let popup = this.renderWaypointPopup(waypoint)
         let marker = L.marker(waypoint.point, { icon: waypointIcon })
