@@ -64,13 +64,8 @@ export default React.createClass({
           {...state}
           {...this.props}
           onSelect={ this.onSelect }
-          onDeSelect={ this.props.onDeSelect }
-          selectedIndex={ this.props.selectedIndex }
-          rowData={ this.getPageData() }
+          rowData={ this.props.data }
           rowComponent={ LeaderboardRow } />
-          <div className="Leaderboard__pagination">
-            <Pagination {...this.props} {...state} onChange={ this.onPage } />
-          </div>
       </div>
     )
   },

@@ -247,6 +247,15 @@
   position: relative;
 }
 
+.hui-OptionList {
+  height: 100%;
+}
+
+.hui-OptionList__scroll-container {
+  max-height: initial;
+  height: 100%;
+}
+
 .hui-LeaderboardRow__charityName {
   font-size: 11px;
 }

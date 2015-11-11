@@ -70,21 +70,6 @@ export default React.createClass({
     this.handleTeamSelection(e.target.value.toString())
   },
 
-  onSelect (id) {
-    id = id || ''
-    let component = this
-    id = id.toString()
-    // Don't change id unless user really intended to
-    clearTimeout(this.waitOut)
-    this.waitOut = setTimeout(function() {
-      component.transitionTo('team', {teamId: id} )
-    }, 300)
-  },
-
-  onDeSelect () {
-    clearTimeout(this.waitOut)
-  },
-
   handleMapFocusChange (activeState) {
     this.setState({
       mapActive: activeState
@@ -164,8 +149,8 @@ export default React.createClass({
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }
-              onSelect={ this.onSelect }
-              onDeSelect={ this.onDeSelect }
+              onSelect={ this.handleTeamSelection }
+              selectedId={ this.getParams().teamId }
               domain={ domain }
               groupBy={ groupBy }
               type={ type }
