@@ -900,14 +900,18 @@ a.hui-Button--slim {
 
 .hui-OptionListItem__radio--hidden {
   position: absolute;
-  left: -100%; }
+  left: -100%;
+  margin: 0;
+  height: 100%; }
 
 .hui-OptionListItem__radio-label {
   display: block; }
 
 .hui-OptionListItem__radio--hidden {
   position: absolute;
-  left: -100%; }
+  left: -100%;
+  margin: 0;
+  height: 100%; }
 
 .hui-OptionList--full {
   width: 100%; }
@@ -1421,7 +1425,7 @@ a.hui-Button--slim {
 .Leaderboards {
   padding-top: 16px;
   box-sizing: border-box;
-  height: calc(100% - 204px); }
+  height: calc(100% - 164px); }
 
 @media screen and (max-width: 900px) {
   .Leaderboards {
