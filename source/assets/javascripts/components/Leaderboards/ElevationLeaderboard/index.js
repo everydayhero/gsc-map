@@ -50,10 +50,13 @@ export default React.createClass({
     })
   },
 
+  isTeam (result) {
+    return !!result.team
+  },
+
   onSuccess: function(response) {
     let data = response.results.map((result, index) => {
       let entity = merge({}, result, result.team, result.page)
-      entity.id = entity.team_page_id || ''
       entity.rank = index + 1
       entity.distance_in_kms = entity.distance_in_meters / 1000
 
@@ -61,8 +64,11 @@ export default React.createClass({
     }) || []
 
     data = filterTeams(this.props.teamPageIds, data)
-    data = data.map(function(item, index) {
+    data = data.map((item, index) => {
       item.rank = index + 1
+      if (this.isTeam(item)) {
+        item.id = item.team_page_id
+      }
       if (item.team_page_id) {
         item.share_url = teamShareUrl(item.team_page_id)
       }

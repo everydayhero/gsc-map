@@ -39,26 +39,12 @@ export default React.createClass({
     }
   },
 
-  onPage: function(increment) {
-    let currentPage = this.state.currentPage + increment
-    this.setState({ currentPage })
-  },
-
-  getPageData: function() {
-    let state = this.state
-    let pageLength = 10
-    let to = (pageLength * (state.currentPage + 1))
-    let from = to - pageLength
-
-    return this.props.data.slice(from, to)
-  },
-
   onSelect: function(page) {
-    let pageId = page.id
+    let pageId = page.data.team_page_id
     let onSelect = this.props.onSelect
 
-    if (page.owner_type === 'user') {
-      pageId = page.team_page_id;
+    if (page.data.owner_type === 'Team') {
+      pageId = page.id
     }
 
     onSelect && onSelect(pageId)
