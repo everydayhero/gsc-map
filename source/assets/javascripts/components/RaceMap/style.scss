@@ -56,7 +56,10 @@
 .gsc-Marker--racer-selected {
   background-image: url('../images/pin-selected.png');
 }
-.leaflet-popup.leaflet-zoom-animated {
+.gsc-Marker--racer-highlighted {
+  background-image: url('../images/pin-highlighted.png');
+}
+.leaflet-popup {
   bottom: 32px !important;
 }
 

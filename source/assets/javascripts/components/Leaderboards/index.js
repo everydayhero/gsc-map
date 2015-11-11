@@ -38,6 +38,7 @@ export default React.createClass({
     let {
       filterQuery,
       teamPageIds,
+      highlightedCharity,
       selectedId,
       onSelect
     } = this.props
@@ -51,6 +52,7 @@ export default React.createClass({
           url={ apiRoutes.get('raised', this.props) }
           teamPageIds={ teamPageIds }
           selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
           onSelect={ onSelect } />
       },
       {
@@ -61,6 +63,7 @@ export default React.createClass({
           url={ apiRoutes.get('distance', this.props) }
           teamPageIds={ teamPageIds }
           selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
           onSelect={ onSelect } />
       },
       {
@@ -71,6 +74,7 @@ export default React.createClass({
           url={ apiRoutes.get('elevation', this.props) }
           teamPageIds={ teamPageIds }
           selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
           onSelect={ onSelect } />
       }
     ]

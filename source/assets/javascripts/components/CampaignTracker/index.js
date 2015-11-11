@@ -117,6 +117,7 @@ export default React.createClass({
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
             selectedTeam={ this.getParams().teamId }
+            highlightedCharity={ this.props.highlightedCharity }
             teamPageIds={ this.props.teamPageIds } />
         </div>
         <div className="panelWrap">
@@ -151,6 +152,7 @@ export default React.createClass({
               filterQuery={ this.state.filterQuery }
               onSelect={ this.handleTeamSelection }
               selectedId={ this.getParams().teamId }
+              highlightedCharity={ this.props.highlightedCharity }
               domain={ domain }
               groupBy={ groupBy }
               type={ type }

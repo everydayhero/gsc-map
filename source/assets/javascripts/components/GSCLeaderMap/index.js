@@ -104,6 +104,8 @@ export default React.createClass({
             <RaceMap
               hasFocus={ state.hideOverlay }
               route={ routeData }
+              highlightedKey="charity_name"
+              highlightedValue={ this.props.highlightedCharity }
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />
