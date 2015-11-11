@@ -59,7 +59,11 @@ export default React.createClass({
   },
 
   handleTeamSelection (id = '') {
-    this.transitionTo('team', { teamId: id } )
+    if (id) {
+      this.transitionTo('team', { teamId: id } )
+    } else {
+      this.transitionTo('tracker')
+    }
   },
 
   handleChange (e) {
