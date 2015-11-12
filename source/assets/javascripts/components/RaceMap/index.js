@@ -23,6 +23,11 @@ let racerIconSelected = L.divIcon({
   html: '<div class="gsc-Marker gsc-Marker--racer-selected" />'
 })
 
+let racerIconHighlighted = L.divIcon({
+  iconSize: new L.Point(36, 36),
+  html: '<div class="gsc-Marker gsc-Marker--racer-highlighted" />'
+})
+
 let waypointIcon = L.divIcon({
   iconSize: new L.Point(36, 36),
   html: '<div class="gsc-Marker gsc-Marker--waypoint" />'
@@ -50,6 +55,8 @@ export default React.createClass({
   propTypes: {
     hasFocus: React.PropTypes.bool,
     racers: React.PropTypes.array,
+    highlightedKey: React.PropTypes.string,
+    highlightedValue: React.PropTypes.string,
     route: React.PropTypes.array.isRequired,
     waypoints: React.PropTypes.array,
     selectedRacer: React.PropTypes.string,
@@ -60,6 +67,8 @@ export default React.createClass({
     return {
       hasFocus: false,
       racers: [],
+      highlightedKey: '',
+      highlightedValue: '',
       route: [],
       waypoints: [],
       selectedRacer: '',
@@ -96,7 +105,8 @@ export default React.createClass({
   },
 
   closeRacerPopup (marker) {
-    marker.setIcon(racerIcon)
+    let icon = marker.highlighted ? racerIconHighlighted : racerIcon
+    marker.setIcon(icon)
   },
 
   handlePopupClose (e) {
@@ -154,6 +164,14 @@ export default React.createClass({
 
   isSelectedRacer (id) {
     return id.toString() === (this.state.selectedRacer && this.state.selectedRacer.toString())
+  },
+
+  racerShouldBeHighlighted (racer) {
+    let { highlightedKey, highlightedValue } = this.props
+    return (
+      (racer && highlightedKey && highlightedValue) &&
+      (racer[highlightedKey] === highlightedValue)
+    )
   },
 
   componentWillReceiveProps (nextProps) {
@@ -244,7 +262,8 @@ export default React.createClass({
     if (focus) {
       marker.closePopup()
     } else {
-      marker.setIcon(racerIcon)
+      let icon = marker.highlighted ? racerIconHighlighted : racerIcon
+      marker.setIcon(icon)
     }
   },
 
@@ -294,9 +313,12 @@ export default React.createClass({
       racers: (racers || []).map((racer) => {
         let point = this.calcRacerPosition(racer.distance_in_meters)
         let popup = this.renderRacerPopup(racer)
-        let marker = L.marker(point, { icon: racerIcon })
+        let highlighted = this.racerShouldBeHighlighted(racer)
+        let icon = highlighted ? racerIconHighlighted : racerIcon
+        let marker = L.marker(point, { icon: icon })
           .bindPopup(popup, {offset: new L.Point(0, -32)})
         marker.racer_id = racer.id
+        marker.highlighted = highlighted
         this.state.markers.addLayer(marker)
 
         return {

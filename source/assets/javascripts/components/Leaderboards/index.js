@@ -12,10 +12,8 @@ export default React.createClass({
 
   getInitialState: function() {
     return {
-      active: 0,
-      currentPage: 0,
-      count: 3,
-      filterQuery: ''
+      filterQuery: '',
+      active: 0
     }
   },
 
@@ -37,37 +35,47 @@ export default React.createClass({
 
   render: function() {
     let state = this.state
-    let props = this.props
+    let {
+      filterQuery,
+      teamPageIds,
+      highlightedCharity,
+      selectedId,
+      onSelect
+    } = this.props
+
     let tabs = [
       {
         label: 'Raised',
         content: <RaisedLeaderboard
           key="raised"
-          filterQuery={ this.props.filterQuery }
-          url={ apiRoutes.get('raised', props) }
-          teamPageIds={ props.teamPageIds }
-          onSelect={ props.onSelect }
-          onDeSelect={ props.onDeSelect }/>
+          filterQuery={ filterQuery }
+          url={ apiRoutes.get('raised', this.props) }
+          teamPageIds={ teamPageIds }
+          selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
+          onSelect={ onSelect } />
       },
       {
         label: 'Distance',
         content: <DistanceLeaderboard
           key="distance"
-          filterQuery={ this.props.filterQuery }
-          url={ apiRoutes.get('distance', props) }
-          teamPageIds={ props.teamPageIds }
-          onSelect={ props.onSelect }
-          onDeSelect={ props.onDeSelect }/>
+          filterQuery={ filterQuery }
+          url={ apiRoutes.get('distance', this.props) }
+          teamPageIds={ teamPageIds }
+          selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
+          onSelect={ onSelect } />
       },
       {
         label: 'Elevation',
         content: <ElevationLeaderboard
           key="elevation"
-          filterQuery={ this.props.filterQuery }
-          url={ apiRoutes.get('elevation', props) }
-          teamPageIds={ props.teamPageIds }
-          onSelect={ props.onSelect }
-          onDeSelect={ props.onDeSelect }/>
+          filterQuery={ filterQuery }
+          url={ apiRoutes.get('elevation', this.props) }
+          teamPageIds={ teamPageIds }
+          selectedId={ selectedId }
+          highlightedCharity={ highlightedCharity }
+          onSelect={ onSelect } />
       }
     ]
 

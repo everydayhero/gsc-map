@@ -59,26 +59,15 @@ export default React.createClass({
   },
 
   handleTeamSelection (id = '') {
-    this.transitionTo('team', { teamId: id } )
+    if (id) {
+      this.transitionTo('team', { teamId: id } )
+    } else {
+      this.transitionTo('tracker')
+    }
   },
 
   handleChange (e) {
     this.handleTeamSelection(e.target.value.toString())
-  },
-
-  onSelect (id) {
-    id = id || ''
-    let component = this
-    id = id.toString()
-    // Don't change id unless user really intended to
-    clearTimeout(this.waitOut)
-    this.waitOut = setTimeout(function() {
-      component.transitionTo('team', {teamId: id} )
-    }, 300)
-  },
-
-  onDeSelect () {
-    clearTimeout(this.waitOut)
   },
 
   handleMapFocusChange (activeState) {
@@ -128,6 +117,7 @@ export default React.createClass({
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleTeamSelection }
             selectedTeam={ this.getParams().teamId }
+            highlightedCharity={ this.props.highlightedCharity }
             teamPageIds={ this.props.teamPageIds } />
         </div>
         <div className="panelWrap">
@@ -160,8 +150,9 @@ export default React.createClass({
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }
-              onSelect={ this.onSelect }
-              onDeSelect={ this.onDeSelect }
+              onSelect={ this.handleTeamSelection }
+              selectedId={ this.getParams().teamId }
+              highlightedCharity={ this.props.highlightedCharity }
               domain={ domain }
               groupBy={ groupBy }
               type={ type }

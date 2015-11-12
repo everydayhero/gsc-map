@@ -52,8 +52,6 @@ export default React.createClass({
       item.rank = index + 1
       if (item.owner_type === 'Team') {
         item.share_url = teamShareUrl(item.id)
-      } else {
-        item.id = item.team_page_id
       }
       return item
     })

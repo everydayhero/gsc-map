@@ -247,6 +247,15 @@
   position: relative;
 }
 
+.hui-OptionList {
+  height: 100%;
+}
+
+.hui-OptionList__scroll-container {
+  max-height: initial;
+  height: 100%;
+}
+
 .hui-LeaderboardRow__charityName {
   font-size: 11px;
 }
@@ -259,10 +268,6 @@
 .hui-Pagination__pager--disabled, .hui-Pagination__pager--disabled:hover {
   border-color: #585858;
   color: #585858;
-}
-
-.hui-LeaderboardRow__rank {
-  width: 72px;
 }
 
 .hui-LeaderboardRow__value {

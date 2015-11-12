@@ -15,7 +15,9 @@ let routes = (
   </Route>
 )
 
-window.renderTracker = function(id, teamPageIds = []) {
+window.renderTracker = function(id, teamPageIds = [], highlightedCharity = '') {
+  console.log('Highlighted: ', highlightedCharity)
+
   let router = Router.create({
     routes: routes,
     location: Router.HashLocation,
@@ -25,6 +27,6 @@ window.renderTracker = function(id, teamPageIds = []) {
   })
 
   router.run(function(Handler) {
-    React.render(<Handler teamPageIds={ teamPageIds }/>, document.getElementById(id))
+    React.render(<Handler teamPageIds={ teamPageIds } highlightedCharity={ highlightedCharity } />, document.getElementById(id))
   })
 }
