@@ -16,6 +16,8 @@ let routes = (
 )
 
 window.renderTracker = function(id, teamPageIds = [], highlightedCharity = '') {
+  console.log('Highlighted: ', highlightedCharity)
+
   let router = Router.create({
     routes: routes,
     location: Router.HashLocation,

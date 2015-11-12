@@ -109,6 +109,12 @@ export default React.createClass({
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />
+            { !!this.props.highlightedCharity &&
+              <div className="GSCLeaderMap__highlight-legend">
+                <i className="GSCLeaderMap__highlight-icon" />
+                Teams cycling for { this.props.highlightedCharity }
+              </div>
+            }
             <button
               onClick={ this.handleOverlayCloseClick}
               className={ buttonClasses }>
