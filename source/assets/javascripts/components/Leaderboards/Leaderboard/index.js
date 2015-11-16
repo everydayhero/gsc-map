@@ -59,6 +59,8 @@ export default React.createClass({
   },
 
   findDataPage (datumId, data) {
+    if (!datumId) return 0
+
     let datum = find(data, (entity) => {
       return entity.id.toString() === datumId.toString()
     })
