@@ -16,12 +16,10 @@ export default React.createClass({
   },
 
   getInitialState: function() {
-    var currentPage = 0
     let { selectedId, data } = this.props
-    if (selectedId) {
-      currentPage = this.findDataPage(selectedId, data)
+    return {
+      currentPage: !!selectedId ? this.findDataPage(selectedId, data) : 0
     }
-    return { currentPage }
   },
 
   getDefaultProps: function() {
@@ -41,21 +39,18 @@ export default React.createClass({
       filterQuery: nextFilterQuery,
       selectedId: nextSelectedId
     } = nextProps
+
     let {
       data: currentData,
       filterQuery: currentFilterQuery,
       selectedId: currentSelectedId
     } = this.props
-    var { currentPage } = this.props
-    currentPage = currentPage || 0
 
-    if (nextSelectedId) {
-      currentPage = this.findDataPage(nextSelectedId, nextData || currentData)
+    if (nextSelectedId || (nextFilterQuery !== currentFilterQuery)) {
+      this.setState({
+        currentPage: this.findDataPage(nextSelectedId, nextData || currentData)
+      })
     }
-    if (nextFilterQuery !== currentFilterQuery) {
-      currentPage = this.findDataPage(currentSelectedId, nextData)
-    }
-    this.setState({ currentPage })
   },
 
   findDataPage (datumId, data) {
