@@ -219,6 +219,14 @@ export default React.createClass({
   },
 
   calcRacerPosition (totalDistance) {
+    let routeData  = this.props.route
+    let finalDatum = routeData[routeData.length - 1]
+    let routeTotal = finalDatum.totalDistance
+
+    if (totalDistance >= routeTotal) {
+      return finalDatum.point
+    }
+
     let startDatum             = this.findRacerRouteStartingDatum(totalDistance)
     let currentBearingDistance = totalDistance - startDatum.totalDistance
     let point                  = startDatum.point
