@@ -7,7 +7,6 @@ import merge from 'lodash/object/merge'
 import filterTeams from '../../../lib/filterTeams'
 import filterable from '../../../mixins/filterable'
 import teamShareUrl from '../../../lib/teamShareUrl'
-import _ from 'lodash'
 
 export default React.createClass({
   displayName: 'DistanceLeaderboard',

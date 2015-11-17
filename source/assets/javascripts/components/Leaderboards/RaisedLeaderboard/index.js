@@ -6,7 +6,7 @@ import getJSON from 'hui/lib/getJSON'
 import filterTeams from '../../../lib/filterTeams'
 import filterable from '../../../mixins/filterable'
 import teamShareUrl from '../../../lib/teamShareUrl'
-import _ from 'lodash'
+import get from 'lodash/object/get'
 
 export default React.createClass({
   displayName: 'RaisedLeaderboard',
@@ -44,7 +44,7 @@ export default React.createClass({
   },
 
   onSuccess: function(response) {
-    let data = _.get(response, 'leaderboard.pages')
+    let data = get(response, 'leaderboard.pages')
     let props = this.props
 
     data = filterTeams(this.props.teamPageIds, data)
