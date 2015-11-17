@@ -80,14 +80,9 @@ export default React.createClass({
   },
 
   onSelect: function(page) {
-    let pageId = page.data.team_page_id
-    let onSelect = this.props.onSelect
+    let { onSelect } = this.props
 
-    if (page.data.owner_type === 'Team') {
-      pageId = page.id
-    }
-
-    onSelect && onSelect(pageId)
+    onSelect && onSelect(page)
   },
 
   renderLeaderboard: function() {
