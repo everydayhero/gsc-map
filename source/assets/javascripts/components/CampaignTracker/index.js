@@ -58,22 +58,36 @@ export default React.createClass({
     }
   },
 
-  handleTeamSelection (id = '') {
-    if (id) {
-      this.transitionTo('team', { teamId: id } )
+  handleMapSelection (newTeamId = '') {
+    let { id } = this.getParams()
+    let { teamId } = this.getQuery()
+    let currentTeamId = this.state.show === 'teams' ? id : teamId
+
+    if (currentTeamId === newTeamId.toString()) return
+
+    if (newTeamId) {
+      this.transitionTo('team', { id: newTeamId } )
     } else {
       this.transitionTo('tracker')
     }
-  },
-
-  handleChange (e) {
-    this.handleTeamSelection(e.target.value.toString())
   },
 
   handleMapFocusChange (activeState) {
     this.setState({
       mapActive: activeState
     })
+  },
+
+  isTeam(entity) {
+    return entity.data.owner_type === 'Team' || !!entity.data.team
+  },
+
+  handleLeaderboardSelection (option) {
+    if (this.isTeam(option)) {
+      this.transitionTo('team', { id: option.id })
+    } else {
+      this.transitionTo('individual', { id: option.id }, { teamId: option.data.team_page_id })
+    }
   },
 
   handleShowChange (e) {
@@ -88,9 +102,7 @@ export default React.createClass({
       show,
       filterPrompt
     }, () => {
-      if (show === 'individuals') {
-        this.transitionTo('tracker')
-      }
+      this.transitionTo('tracker')
     })
   },
 
@@ -107,6 +119,10 @@ export default React.createClass({
       'mapWrap--active': !!mapActive
     })
 
+    let { id } = this.getParams()
+    let { teamId } = this.getQuery()
+    let selectedTeamId = teamId || id
+
     return (
       <div className="tracker">
         <div className={ mapWrapClasses }>
@@ -115,8 +131,8 @@ export default React.createClass({
             campaignId={ campaignId }
             startAt={ startAt }
             onFocusChange={ this.handleMapFocusChange }
-            onTeamSelection={ this.handleTeamSelection }
-            selectedTeam={ this.getParams().teamId }
+            onTeamSelection={ this.handleMapSelection }
+            selectedTeam={ selectedTeamId }
             highlightedCharity={ this.props.highlightedCharity }
             teamPageIds={ this.props.teamPageIds } />
         </div>
@@ -150,8 +166,8 @@ export default React.createClass({
             </div>
             <Leaderboards
               filterQuery={ this.state.filterQuery }
-              onSelect={ this.handleTeamSelection }
-              selectedId={ this.getParams().teamId }
+              onSelect={ this.handleLeaderboardSelection }
+              selectedId={ id }
               highlightedCharity={ this.props.highlightedCharity }
               domain={ domain }
               groupBy={ groupBy }

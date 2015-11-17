@@ -36,6 +36,7 @@ export default React.createClass({
   render: function() {
     let state = this.state
     let {
+      type,
       filterQuery,
       teamPageIds,
       highlightedCharity,
@@ -48,6 +49,7 @@ export default React.createClass({
         label: 'Raised',
         content: <RaisedLeaderboard
           key="raised"
+          type={ type }
           filterQuery={ filterQuery }
           url={ apiRoutes.get('raised', this.props) }
           teamPageIds={ teamPageIds }
@@ -59,6 +61,7 @@ export default React.createClass({
         label: 'Distance',
         content: <DistanceLeaderboard
           key="distance"
+          type={ type }
           filterQuery={ filterQuery }
           url={ apiRoutes.get('distance', this.props) }
           teamPageIds={ teamPageIds }
@@ -70,6 +73,7 @@ export default React.createClass({
         label: 'Elevation',
         content: <ElevationLeaderboard
           key="elevation"
+          type={ type }
           filterQuery={ filterQuery }
           url={ apiRoutes.get('elevation', this.props) }
           teamPageIds={ teamPageIds }

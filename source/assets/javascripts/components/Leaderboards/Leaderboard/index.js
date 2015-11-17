@@ -43,10 +43,11 @@ export default React.createClass({
     let {
       data: currentData,
       filterQuery: currentFilterQuery,
-      selectedId: currentSelectedId
+      selectedId: currentSelectedId,
+      type
     } = this.props
 
-    if (nextSelectedId || (nextFilterQuery !== currentFilterQuery)) {
+    if ((nextSelectedId && (type !== 'individual')) || (nextFilterQuery !== currentFilterQuery)) {
       this.setState({
         currentPage: this.findDataPage(nextSelectedId, nextData || currentData)
       })
@@ -80,14 +81,9 @@ export default React.createClass({
   },
 
   onSelect: function(page) {
-    let pageId = page.data.team_page_id
-    let onSelect = this.props.onSelect
+    let { onSelect } = this.props
 
-    if (page.data.owner_type === 'Team') {
-      pageId = page.id
-    }
-
-    onSelect && onSelect(pageId)
+    onSelect && onSelect(page)
   },
 
   renderLeaderboard: function() {

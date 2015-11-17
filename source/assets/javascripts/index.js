@@ -10,7 +10,8 @@ let NotFoundRoute = Router.NotFoundRoute
 let routes = (
   <Route name="root" path="/" handler={ CampaignTracker }>
     <Route name="tracker" path="tracker" handler={ CampaignTracker }/>
-    <Route name="team" path="tracker/team/:teamId" handler={ CampaignTracker }/>
+    <Route name="team" path="tracker/team/:id" handler={ CampaignTracker }/>
+    <Route name="individual" path="tracker/individual/:id" handler={ CampaignTracker }/>
     <NotFoundRoute handler={ RouteHandler } />
   </Route>
 )
