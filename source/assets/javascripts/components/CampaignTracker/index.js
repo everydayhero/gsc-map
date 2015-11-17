@@ -102,9 +102,7 @@ export default React.createClass({
       show,
       filterPrompt
     }, () => {
-      if (show === 'individuals') {
-        this.transitionTo('tracker')
-      }
+      this.transitionTo('tracker')
     })
   },
 
