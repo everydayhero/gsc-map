@@ -43,10 +43,11 @@ export default React.createClass({
     let {
       data: currentData,
       filterQuery: currentFilterQuery,
-      selectedId: currentSelectedId
+      selectedId: currentSelectedId,
+      type
     } = this.props
 
-    if (nextSelectedId || (nextFilterQuery !== currentFilterQuery)) {
+    if ((nextSelectedId && (type !== 'individual')) || (nextFilterQuery !== currentFilterQuery)) {
       this.setState({
         currentPage: this.findDataPage(nextSelectedId, nextData || currentData)
       })
