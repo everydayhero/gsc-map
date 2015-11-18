@@ -1,6 +1,5 @@
 import React from 'react'
 import L from 'leaflet'
-import 'leaflet.markercluster'
 import 'classlist-polyfill'
 import find from 'lodash/collection/find'
 import RacerPopup from './RacerPopup'
@@ -58,6 +57,7 @@ export default React.createClass({
     highlightedKey: React.PropTypes.string,
     highlightedValue: React.PropTypes.string,
     route: React.PropTypes.array.isRequired,
+    bonusRoute: React.PropTypes.array,
     waypoints: React.PropTypes.array,
     selectedRacer: React.PropTypes.string,
     onRacerSelection: React.PropTypes.func
@@ -70,6 +70,7 @@ export default React.createClass({
       highlightedKey: '',
       highlightedValue: '',
       route: [],
+      bonusRoute: [],
       waypoints: [],
       selectedRacer: '',
       onRacerSelection: () => {}
@@ -125,6 +126,7 @@ export default React.createClass({
     let markers = new L.FeatureGroup()
     map.addLayer(markers)
 
+
     this.setState({
       map,
       waypoints,
@@ -136,12 +138,12 @@ export default React.createClass({
       }).addTo(map)
       map.on('popupopen', this.handlePopupOpen)
       map.on('popupclose', this.handlePopupClose)
-      this.renderRoute()
+      this.renderRoutes()
       this.renderWaypoints()
       if (this.props.racers.length) {
         this.renderRacers(this.props.racers)
       } else {
-        let routePoints =  this.props.route.map(routeDatum => routeDatum.point)
+        let routePoints = this.props.route.map(routeDatum => routeDatum.point)
         this.state.map.fitBounds(routePoints, {
           padding: [50, 50]
         })
@@ -218,7 +220,14 @@ export default React.createClass({
     }) || routeData[routeData.length - 1] || NullRouteDatum
   },
 
-  calcRacerPosition (totalDistance) {
+  calcRacerPosition (totalDistance, routeData) {
+    let finalDatum = routeData[routeData.length - 1]
+    let routeTotal = finalDatum.totalDistance
+
+    if (totalDistance >= routeTotal) {
+      return finalDatum.point
+    }
+
     let startDatum             = this.findRacerRouteStartingDatum(totalDistance)
     let currentBearingDistance = totalDistance - startDatum.totalDistance
     let point                  = startDatum.point
@@ -281,27 +290,32 @@ export default React.createClass({
 
   racersUpdated () {
     let selectedRacer = this.getSelectedRacer()
+    this.fitToRacers()
+
     if (selectedRacer) {
-      this.fitToRacers()
       this.selectRacer(selectedRacer.id)
-    } else {
-      this.fitToRacers()
     }
   },
 
-  renderRoute () {
-    let routePoints = this.props.route.map((routeDatum) => {
-      return routeDatum.point
-    })
-    let startMarker = L.marker(routePoints[0], { icon: startIcon })
-    let finishMarker = L.marker(routePoints [routePoints .length - 1], { icon: finishIcon })
-    L.polyline(routePoints, {
-      color: '#4c80a5',
+  renderRoutes () {
+    let { route, bonusRoute } = this.props
+    let routePoints = route.map(routeDatum => routeDatum.point)
+    this.renderRoute(routePoints, '#4c80a5', startIcon, finishIcon)
+
+    let bonusRoutePoints = bonusRoute.map(routeDatum => routeDatum.point)
+    this.renderRoute(bonusRoutePoints, '#ff983a')
+  },
+
+  renderRoute (point, color, start, finish) {
+    L.polyline(point, {
+      color,
       opacity: 1,
       weight: 5
     }).addTo(this.state.map)
-    startMarker.addTo(this.state.map)
-    finishMarker.addTo(this.state.map)
+    !!start && L.marker(point[0], { icon: start })
+      .addTo(this.state.map)
+    !!finish && L.marker(point[point .length - 1], { icon: finish })
+      .addTo(this.state.map)
   },
 
   clearRenderedRacers () {
@@ -309,9 +323,11 @@ export default React.createClass({
   },
 
   renderRacers (racers) {
+    let { route, bonusRoute } = this.props
+    let routeData = route.concat(bonusRoute)
     this.setState({
       racers: (racers || []).map((racer) => {
-        let point = this.calcRacerPosition(racer.distance_in_meters)
+        let point = this.calcRacerPosition(racer.distance_in_meters, routeData)
         let popup = this.renderRacerPopup(racer)
         let highlighted = this.racerShouldBeHighlighted(racer)
         let icon = highlighted ? racerIconHighlighted : racerIcon
