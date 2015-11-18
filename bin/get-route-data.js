@@ -5,6 +5,9 @@ const http = require('http')
 const polyline = require('polyline')
 const earthsRadiusInMeters = 6371000
 
+const fileName = process.argv[2] || 'route'
+const waypoints = require(`./${fileName}-waypoints`)
+
 function toRad (value) {
   return value * Math.PI / 180
 }
@@ -92,7 +95,7 @@ function handleResponse (response) {
     }'`;
 
     fs.writeFile(
-      './source/assets/data/route.js',
+      `./source/assets/data/${ fileName }.js`,
       content,
       function (err) {
         if (err) { throw new Error(err) }
@@ -103,54 +106,9 @@ function handleResponse (response) {
   })
 }
 
-/*
-Brisbane -27.465245, 153.028644
-Grahamstown Lake -32.728199, 151.784682
-Sydney -33.852333, 151.210812
-Colo Vale -34.387102, 150.522240
-Dog on the Tucker Box -35.001152, 148.110883
-Chiltern -36.139044, 146.645555
-Melbourne -37.817644, 144.967105
-Ararat -37.282489, 142.931815
-Serviceton -36.357478, 141.083789
-St Ives -35.109216, 138.975806
-Adelaide -34.940222, 138.624434
-Port Pirie -33.184856, 138.021394
-Penong -31.928627, 133.012377
-Eyre Highway -31.611057, 129.720238
-Mundrabilla -31.818328, 128.225760
-Caiguna -32.269366, 125.487190
-Fraser Range -32.057720, 122.994989
-Lake Lefroy -31.445026, 121.563910
-Southern Cross -31.233382, 119.329575
-Meenar -31.635410, 116.891687
-Perth -31.953573, 115.857006
-*/
-
 let options = {
   host: 'api-osrm-routed-production.tilestream.net',
-  path: (`/viaroute?z=12
-    &loc=-27.465245,153.028644
-    &loc=-32.728199,151.784682
-    &loc=-33.852333,151.210812
-    &loc=-34.387102,150.522240
-    &loc=-35.001152,148.110883
-    &loc=-36.139044,146.645555
-    &loc=-37.817644,144.967105
-    &loc=-37.282489,142.931815
-    &loc=-36.357478,141.083789
-    &loc=-35.109216,138.975806
-    &loc=-34.940222,138.624434
-    &loc=-33.184856,138.021394
-    &loc=-31.928627,133.012377
-    &loc=-31.611057,129.720238
-    &loc=-31.818328,128.225760
-    &loc=-32.269366,125.487190
-    &loc=-32.057720,122.994989
-    &loc=-31.445026,121.563910
-    &loc=-31.233382,119.329575
-    &loc=-31.635410,116.891687
-    &loc=-31.953573,115.857006`).replace(/\n|\s/g, '')
+  path: (`/viaroute?z=12${ waypoints }`).replace(/\n|\s/g, '')
 }
 
 http.request(options, handleResponse).end()
