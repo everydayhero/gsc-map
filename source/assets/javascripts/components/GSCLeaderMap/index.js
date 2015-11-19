@@ -85,6 +85,42 @@ export default React.createClass({
     })
   },
 
+  renderLegend () {
+    const  { highlightedCharity } = this.props
+    if (highlightedCharity || bonusRouteData.length) {
+      return (
+        <div className="GSCLeaderMap__legend">
+          { !!highlightedCharity &&
+            <div className="GSCLeaderMap__legend-item">
+              <i className="GSCLeaderMap__highlight-icon" />
+              Teams cycling for { this.props.highlightedCharity }
+            </div> }
+          { !!bonusRouteData.length &&
+            <div className="GSCLeaderMap__legend-item">
+              <svg
+                className="GSCLeaderMap__path-indicator"
+                viewBox="0 0 22 22" >
+                <line
+                  x1="5" y1="11"
+                  x2="17" y2="11"
+                  style={{
+                    'stroke-linejoin': 'round',
+                    'stroke-linecap': 'round',
+                    'stroke': '#4c80a5',
+                    'stroke-opacity': '1',
+                    'stroke-width': '5',
+                    'stroke-dasharray': '1.25 10',
+                    'fill': 'none'
+                  }} />
+              </svg>
+              Bonus route <strong>NEW!</strong>
+            </div> }
+
+        </div>
+      )
+    }
+  },
+
   render () {
     let state = this.state
     let overlayClasses = classnames({
@@ -116,12 +152,7 @@ export default React.createClass({
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />
-            { !!this.props.highlightedCharity &&
-              <div className="GSCLeaderMap__highlight-legend">
-                <i className="GSCLeaderMap__highlight-icon" />
-                Teams cycling for { this.props.highlightedCharity }
-              </div>
-            }
+            { this.renderLegend() }
             <button
               onClick={ this.handleOverlayCloseClick}
               className={ buttonClasses }>

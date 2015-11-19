@@ -4,6 +4,7 @@
 }
 
 .GSCLeaderMap {
+  font-family: $font-copy;
   background-color: #dddddd;
 }
 
@@ -85,7 +86,7 @@
   }
 }
 
-.GSCLeaderMap__highlight-legend {
+.GSCLeaderMap__legend {
   background-color: white;
   border-radius: $border-radius;
   font-size: 11px;
@@ -95,19 +96,27 @@
   top: 1em;
   z-index: 2;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
-  padding: 0.5em;
-  padding-left: 1.8em;
-  line-height: 1.5em;
+  padding: 0.75em 1em;
+  line-height: 1.8em;
+}
+
+.GSCLeaderMap__legend-item {
+  position: relative;
+  padding-left: 2.3em;
+}
+
+.GSCLeaderMap__highlight-icon,
+.GSCLeaderMap__path-indicator {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-45%);
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .GSCLeaderMap__highlight-icon {
-  display: block;
-  position: absolute;
-  left: 0.5em;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1em;
-  height: 1em;
   border-radius: 50%;
   background-color: $alert;
 }
