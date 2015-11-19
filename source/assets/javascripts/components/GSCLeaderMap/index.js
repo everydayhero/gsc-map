@@ -97,10 +97,23 @@ export default React.createClass({
             </div> }
           { !!bonusRouteData.length &&
             <div className="GSCLeaderMap__legend-item">
-              <svg width="10" height="5" >
-                <line x1="0" y1="2.5" x2="10" y2="2.5" stroke-dash-array="2.5 10" />
+              <svg
+                className="GSCLeaderMap__path-indicator"
+                viewBox="0 0 22 22" >
+                <line
+                  x1="5" y1="11"
+                  x2="17" y2="11"
+                  style={{
+                    'stroke-linejoin': 'round',
+                    'stroke-linecap': 'round',
+                    'stroke': '#4c80a5',
+                    'stroke-opacity': '1',
+                    'stroke-width': '5',
+                    'stroke-dasharray': '1.25 10',
+                    'fill': 'none'
+                  }} />
               </svg>
-              Bonus route!
+              Bonus route <strong>NEW!</strong>
             </div> }
 
         </div>
