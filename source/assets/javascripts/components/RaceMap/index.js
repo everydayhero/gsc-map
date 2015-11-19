@@ -211,8 +211,7 @@ export default React.createClass({
     }
   },
 
-  findRacerRouteStartingDatum (distance) {
-    let routeData = this.props.route
+  findRacerRouteStartingDatum (distance, routeData) {
     return routeData.find((datum, index) => {
       let next = routeData[index + 1]
       return (distance > datum.totalDistance) &&
@@ -228,7 +227,7 @@ export default React.createClass({
       return finalDatum.point
     }
 
-    let startDatum             = this.findRacerRouteStartingDatum(totalDistance)
+    let startDatum             = this.findRacerRouteStartingDatum(totalDistance, routeData)
     let currentBearingDistance = totalDistance - startDatum.totalDistance
     let point                  = startDatum.point
     let lat                    = toRad(point[0]) || 0
