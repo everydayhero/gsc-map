@@ -300,15 +300,20 @@ export default React.createClass({
   renderRoutes () {
     let { route, bonusRoute } = this.props
     let routePoints = route.map(routeDatum => routeDatum.point)
-    this.renderRoute(routePoints, '#4c80a5', startIcon, finishIcon)
+    this.renderRoute(routePoints, {
+      color: '#4c80a5'
+    }, startIcon, finishIcon)
 
     let bonusRoutePoints = bonusRoute.map(routeDatum => routeDatum.point)
-    this.renderRoute(bonusRoutePoints, '#ff983a')
+    this.renderRoute(bonusRoutePoints, {
+      color: '#4c80a5',
+      dashArray: '1.25 10'
+    })
   },
 
-  renderRoute (point, color, start, finish) {
+  renderRoute (point, style, start, finish) {
     L.polyline(point, {
-      color,
+      ...style,
       opacity: 1,
       weight: 5
     }).addTo(this.state.map)
