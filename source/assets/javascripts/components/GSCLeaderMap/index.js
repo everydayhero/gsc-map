@@ -85,6 +85,29 @@ export default React.createClass({
     })
   },
 
+  renderLegend () {
+    const  { highlightedCharity } = this.props
+    if (highlightedCharity || bonusRouteData.length) {
+      return (
+        <div className="GSCLeaderMap__legend">
+          { !!highlightedCharity &&
+            <div className="GSCLeaderMap__legend-item">
+              <i className="GSCLeaderMap__highlight-icon" />
+              Teams cycling for { this.props.highlightedCharity }
+            </div> }
+          { !!bonusRouteData.length &&
+            <div className="GSCLeaderMap__legend-item">
+              <svg width="10" height="5" >
+                <line x1="0" y1="2.5" x2="10" y2="2.5" stroke-dash-array="2.5 10" />
+              </svg>
+              Bonus route!
+            </div> }
+
+        </div>
+      )
+    }
+  },
+
   render () {
     let state = this.state
     let overlayClasses = classnames({
@@ -116,12 +139,7 @@ export default React.createClass({
               onRacerSelection={ this.props.onTeamSelection }
               selectedRacer={ this.props.selectedTeam }
               racers={ this.state.teams } />
-            { !!this.props.highlightedCharity &&
-              <div className="GSCLeaderMap__highlight-legend">
-                <i className="GSCLeaderMap__highlight-icon" />
-                Teams cycling for { this.props.highlightedCharity }
-              </div>
-            }
+            { this.renderLegend() }
             <button
               onClick={ this.handleOverlayCloseClick}
               className={ buttonClasses }>
