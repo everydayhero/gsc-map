@@ -1,9 +1,9 @@
 'use strict'
 
 let api = {
-  raised: 'https://shared-scripts.s3.amazonaws.com/1.7.4-static/json/{{ type }}_leaderboard.json',
-  distance: 'https://shared-scripts.s3.amazonaws.com/1.7.4-static/json/{{ groupBy }}_distance.json',
-  elevation: 'https://shared-scripts.s3.amazonaws.com/1.7.4-static/json/{{ groupBy }}_elevation.json'
+  raised: '/json/{{ type }}_leaderboard.json',
+  distance: '/json/{{ groupBy }}_distance.json',
+  elevation: '/json/{{ groupBy }}_elevation.json'
 }
 
 export default {
