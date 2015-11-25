@@ -1,7 +1,7 @@
 'use strict'
 
 let api = {
-  raised: '/json/{{ type }}_distance.json',
+  raised: '/json/{{ type }}_leaderboard.json',
   distance: '/json/{{ groupBy }}_distance.json',
   elevation: '/json/{{ groupBy }}_elevation.json'
 }
