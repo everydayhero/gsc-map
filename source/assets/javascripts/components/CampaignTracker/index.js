@@ -11,7 +11,7 @@ import _ from 'lodash'
 const campaignId = 'au-19283'
 const domain = 'everydayhero.com'
 const startAt = '2015-10-31T14:00:00Z'
-const endAt = '2015-11-28T14:00:00Z'
+const endAt = '2015-11-15T14:00:00Z'
 
 const showMap = {
   individuals: {

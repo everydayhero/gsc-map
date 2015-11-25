@@ -1,6 +1,6 @@
 {
   "name": "gsc-map",
-  "version": "1.7.4",
+  "version": "1.7.4-static",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -22,11 +22,12 @@
     "watch-images": "nodemon -x 'npm run images' -w source/assets/images -e png,svg,jpg",
     "index": "mkdir -p dist/$npm_package_version && cp source/index.html dist/$npm_package_version/index.html",
     "watch-index": "nodemon -x 'npm run index' -w source -e html",
-    "build": "npm run data && npm run scripts-prod && npm run styles && npm run images",
+    "build": "npm run data && npm run scripts-prod && npm run styles && npm run images && npm run static-json",
     "watch": "npm run watch-data & npm run watch-scripts & npm run watch-styles & npm run watch-images & npm run watch-index",
     "serve": "static dist/$npm_package_version",
     "dev": "npm run watch & npm run serve",
     "test": "mocha --compilers js:babel/register --recursive source/**/__tests__/**-test.js",
+    "static-json": "cp -r source/json/ dist/$npm_package_version/json/",
     "deploy": "git-directory-deploy --directory dist --branch gh-pages"
   },
   "author": "Brad Parker <hi@bradparker.com>",

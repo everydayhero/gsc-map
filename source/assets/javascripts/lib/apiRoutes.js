@@ -1,9 +1,9 @@
 'use strict'
 
 let api = {
-  raised: 'https://{{ domain }}/api/v2/campaigns/{{ campaignId }}/leaderboard.jsonp?type={{ type }}&limit=500&include_pages=true',
-  distance: 'https://{{ domain }}/api/v2/search/fitness_activities_totals.jsonp?limit=500&type=bike&group_by={{ groupBy }}&sort_by=distance_in_meters&campaign_id={{ campaignId }}&start_at={{ startAt }}&end_at={{ endAt }}',
-  elevation: 'https://{{ domain }}/api/v2/search/fitness_activities_totals.jsonp?limit=500&type=bike&group_by={{ groupBy }}&sort_by=elevation_in_meters&campaign_id={{ campaignId }}&start_at={{ startAt }}&end_at={{ endAt }}'
+  raised: '/json/{{ type }}_distance.json',
+  distance: '/json/{{ groupBy }}_distance.json',
+  elevation: '/json/{{ groupBy }}_elevation.json'
 }
 
 export default {
