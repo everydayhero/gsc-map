@@ -11,6 +11,7 @@ import _ from 'lodash'
 const campaignId = 'au-19283'
 const domain = 'everydayhero.com'
 const startAt = '2015-10-31T14:00:00Z'
+const endAt = '2015-11-28T14:00:00Z'
 
 const showMap = {
   individuals: {
@@ -130,6 +131,7 @@ export default React.createClass({
             domain={ domain }
             campaignId={ campaignId }
             startAt={ startAt }
+            endAt={ endAt }
             onFocusChange={ this.handleMapFocusChange }
             onTeamSelection={ this.handleMapSelection }
             selectedTeam={ selectedTeamId }
@@ -174,6 +176,7 @@ export default React.createClass({
               type={ type }
               campaignId={ campaignId }
               startAt={ startAt }
+              endAt={ endAt }
               teamPageIds={ this.props.teamPageIds } />
           </div>
         </div>
