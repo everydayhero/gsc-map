@@ -140,8 +140,7 @@ export default React.createClass({
           <div className="panel">
             <h2 className="panel_header">Leaderboards</h2>
             <div className="panel_instructions">
-              <p>As each team logs their rides, their marker will move along the course.</p>
-              <p>Select a team to view their progress.</p>
+              <p>Markers show where teams finished in<br/>the Great Southern Crossing.</p>
             </div>
             <div className="gsc-grid-container">
               <div className="gsc-grid-item gsc-grid-item--one-half">
