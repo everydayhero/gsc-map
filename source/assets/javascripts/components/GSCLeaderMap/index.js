@@ -3,19 +3,13 @@ import classnames from 'classnames'
 import merge from 'lodash/object/merge'
 import RaceMap from '../RaceMap'
 import routeString from '../../../data/route.js'
-import bonusRouteString from '../../../data/bonus-route.js'
 import apiRoutes from '../../lib/apiRoutes'
 import getJSON from 'hui/lib/getJSON'
 import filterTeams from '../../lib/filterTeams'
 import 'es6-shim'
 
 const routeData = JSON.parse(routeString)
-const bonusRouteData = JSON.parse(bonusRouteString).map(datum => {
-  const routeMax = routeData[routeData.length - 1].totalDistance
-  datum.totalDistance += routeMax
-  return datum
-})
-
+const bonusRouteData = []
 export default React.createClass({
 
   propTypes: {
