@@ -10,8 +10,8 @@ import _ from 'lodash'
 
 const campaignId = 'au-19283'
 const domain = 'everydayhero.com'
-const startAt = '2015-10-31T14:00:00Z'
-const endAt = '2015-11-28T14:00:00Z'
+const startAt = '2016-10-31T14:00:00Z'
+const endAt = '2016-11-28T14:00:00Z'
 
 const showMap = {
   individuals: {
@@ -137,48 +137,6 @@ export default React.createClass({
             selectedTeam={ selectedTeamId }
             highlightedCharity={ this.props.highlightedCharity }
             teamPageIds={ this.props.teamPageIds } />
-        </div>
-        <div className="panelWrap">
-          <div className="panel">
-            <h2 className="panel_header">Leaderboards</h2>
-            <div className="panel_instructions">
-              <p>As each team logs their rides, their marker will move along the course.</p>
-              <p>Select a team to view their progress.</p>
-            </div>
-            <div className="gsc-grid-container">
-              <div className="gsc-grid-item gsc-grid-item--one-half">
-                <div className="tracker__select">
-                  <select
-                    value={ this.state.show }
-                    className="tracker__select-input"
-                    onChange={ this.handleShowChange }>
-
-                    <option value="teams">Teams</option>
-                    <option value="individuals">Individuals</option>
-                  </select>
-                </div>
-              </div>
-              <div className="tracker__filter gsc-grid-item gsc-grid-item--one-half">
-                <input
-                  className="tracker__filter-input"
-                  type="search"
-                  onChange={ this.handleFilterChange }
-                  placeholder={ this.state.filterPrompt } />
-              </div>
-            </div>
-            <Leaderboards
-              filterQuery={ this.state.filterQuery }
-              onSelect={ this.handleLeaderboardSelection }
-              selectedId={ id }
-              highlightedCharity={ this.props.highlightedCharity }
-              domain={ domain }
-              groupBy={ groupBy }
-              type={ type }
-              campaignId={ campaignId }
-              startAt={ startAt }
-              endAt={ endAt }
-              teamPageIds={ this.props.teamPageIds } />
-          </div>
         </div>
       </div>
     )
